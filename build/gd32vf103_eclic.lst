@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 1
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 1
 
 
    1              		.file	"gd32vf103_eclic.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 1
   41:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c **** 
   42:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c **** /*!
   43:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c ****     \brief      enable the global interrupt
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 2
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 2
 
 
   44:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c ****     \param[in]  none
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 1
   64              	}
   51              		csrrc a5, mstatus, 8
   52              	# 0 "" 2
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 3
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 3
 
 
   53              	.LVL1:
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 1
   91:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c **** {
   83              		.loc 1 91 1
   84              		.cfi_startproc
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 4
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 4
 
 
   85              	.LVL4:
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 1
  129              		.align	1
  130              		.globl	eclic_irq_disable
  132              	eclic_irq_disable:
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 5
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 5
 
 
  133              	.LFB6:
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 1
  166              		.section	.text.eclic_send_event,"ax",@progbits
  167              		.align	1
  168              		.globl	eclic_send_event
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 6
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 6
 
 
  170              	eclic_send_event:
@@ -340,170 +340,170 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 1
  195              		.file 3 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
  196              		.file 4 "./../../firmware/RISCV/drivers/n200_func.h"
  197              		.file 5 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 7
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 gd32vf103_eclic.c
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:13     .text.eclic_global_interrupt_enable:0000000000000000 eclic_global_interrupt_enable
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:17     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:18     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:20     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:21     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:22     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:13     .text.eclic_global_interrupt_enable:0000000000000000 eclic_global_interrupt_enable
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:17     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:18     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:20     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:21     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:22     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
 ./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c:51     .text.eclic_global_interrupt_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:31     .text.eclic_global_interrupt_enable:0000000000000004 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:32     .text.eclic_global_interrupt_enable:0000000000000004 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:33     .text.eclic_global_interrupt_enable:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:40     .text.eclic_global_interrupt_disable:0000000000000000 eclic_global_interrupt_disable
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:43     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:44     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:46     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:47     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:48     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:31     .text.eclic_global_interrupt_enable:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:32     .text.eclic_global_interrupt_enable:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:33     .text.eclic_global_interrupt_enable:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:40     .text.eclic_global_interrupt_disable:0000000000000000 eclic_global_interrupt_disable
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:43     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:44     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:46     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:47     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:48     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
 ./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c:63     .text.eclic_global_interrupt_disable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:57     .text.eclic_global_interrupt_disable:0000000000000004 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:58     .text.eclic_global_interrupt_disable:0000000000000004 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:59     .text.eclic_global_interrupt_disable:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:66     .text.eclic_priority_group_set:0000000000000000 eclic_priority_group_set
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:69     .text.eclic_priority_group_set:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:71     .text.eclic_priority_group_set:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:72     .text.eclic_priority_group_set:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:74     .text.eclic_priority_group_set:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:81     .text.eclic_irq_enable:0000000000000000 eclic_irq_enable
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:84     .text.eclic_irq_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:86     .text.eclic_irq_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:87     .text.eclic_irq_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:88     .text.eclic_irq_enable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:90     .text.eclic_irq_enable:0000000000000002 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:93     .text.eclic_irq_enable:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:94     .text.eclic_irq_enable:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:96     .text.eclic_irq_enable:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:100    .text.eclic_irq_enable:000000000000000c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:103    .text.eclic_irq_enable:0000000000000014 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:108    .text.eclic_irq_enable:0000000000000020 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:111    .text.eclic_irq_enable:0000000000000024 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:112    .text.eclic_irq_enable:0000000000000026 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:115    .text.eclic_irq_enable:0000000000000028 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:117    .text.eclic_irq_enable:0000000000000028 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:119    .text.eclic_irq_enable:000000000000002a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:121    .text.eclic_irq_enable:000000000000002c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:123    .text.eclic_irq_enable:000000000000002c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:125    .text.eclic_irq_enable:0000000000000034 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:132    .text.eclic_irq_disable:0000000000000000 eclic_irq_disable
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:135    .text.eclic_irq_disable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:137    .text.eclic_irq_disable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:138    .text.eclic_irq_disable:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:140    .text.eclic_irq_disable:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:147    .text.eclic_system_reset:0000000000000000 eclic_system_reset
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:150    .text.eclic_system_reset:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:151    .text.eclic_system_reset:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:152    .text.eclic_system_reset:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:153    .text.eclic_system_reset:0000000000000000 .L0 
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 8
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:57     .text.eclic_global_interrupt_disable:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:58     .text.eclic_global_interrupt_disable:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:59     .text.eclic_global_interrupt_disable:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:66     .text.eclic_priority_group_set:0000000000000000 eclic_priority_group_set
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:69     .text.eclic_priority_group_set:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:71     .text.eclic_priority_group_set:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:72     .text.eclic_priority_group_set:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:74     .text.eclic_priority_group_set:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:81     .text.eclic_irq_enable:0000000000000000 eclic_irq_enable
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:84     .text.eclic_irq_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:86     .text.eclic_irq_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:87     .text.eclic_irq_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:88     .text.eclic_irq_enable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:90     .text.eclic_irq_enable:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:93     .text.eclic_irq_enable:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:94     .text.eclic_irq_enable:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:96     .text.eclic_irq_enable:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:100    .text.eclic_irq_enable:000000000000000c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:103    .text.eclic_irq_enable:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:108    .text.eclic_irq_enable:0000000000000020 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:111    .text.eclic_irq_enable:0000000000000024 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:112    .text.eclic_irq_enable:0000000000000026 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:115    .text.eclic_irq_enable:0000000000000028 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:117    .text.eclic_irq_enable:0000000000000028 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:119    .text.eclic_irq_enable:000000000000002a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:121    .text.eclic_irq_enable:000000000000002c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:123    .text.eclic_irq_enable:000000000000002c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:125    .text.eclic_irq_enable:0000000000000034 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:132    .text.eclic_irq_disable:0000000000000000 eclic_irq_disable
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:135    .text.eclic_irq_disable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:137    .text.eclic_irq_disable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:138    .text.eclic_irq_disable:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:140    .text.eclic_irq_disable:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:147    .text.eclic_system_reset:0000000000000000 eclic_system_reset
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:150    .text.eclic_system_reset:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:151    .text.eclic_system_reset:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:152    .text.eclic_system_reset:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:153    .text.eclic_system_reset:0000000000000000 .L0 
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 8
 
 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:158    .text.eclic_system_reset:000000000000000e .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:159    .text.eclic_system_reset:000000000000000e .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:162    .text.eclic_system_reset:0000000000000012 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:163    .text.eclic_system_reset:0000000000000014 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:170    .text.eclic_send_event:0000000000000000 eclic_send_event
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:173    .text.eclic_send_event:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:174    .text.eclic_send_event:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:176    .text.eclic_send_event:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:177    .text.eclic_send_event:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:178    .text.eclic_send_event:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:158    .text.eclic_system_reset:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:159    .text.eclic_system_reset:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:162    .text.eclic_system_reset:0000000000000012 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:163    .text.eclic_system_reset:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:170    .text.eclic_send_event:0000000000000000 eclic_send_event
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:173    .text.eclic_send_event:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:174    .text.eclic_send_event:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:176    .text.eclic_send_event:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:177    .text.eclic_send_event:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:178    .text.eclic_send_event:0000000000000000 .L0 
 ./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c:128    .text.eclic_send_event:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:187    .text.eclic_send_event:0000000000000004 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:188    .text.eclic_send_event:0000000000000004 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:189    .text.eclic_send_event:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:36     .text.eclic_global_interrupt_enable:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:62     .text.eclic_global_interrupt_disable:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:77     .text.eclic_priority_group_set:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:128    .text.eclic_irq_enable:0000000000000034 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:143    .text.eclic_irq_disable:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:166    .text.eclic_system_reset:0000000000000014 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:192    .text.eclic_send_event:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:187    .text.eclic_send_event:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:188    .text.eclic_send_event:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:189    .text.eclic_send_event:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:36     .text.eclic_global_interrupt_enable:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:62     .text.eclic_global_interrupt_disable:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:77     .text.eclic_priority_group_set:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:128    .text.eclic_irq_enable:0000000000000034 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:143    .text.eclic_irq_disable:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:166    .text.eclic_system_reset:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:192    .text.eclic_send_event:0000000000000006 .L0 
                      .debug_frame:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:563    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1020   .debug_str:00000000000001f0 .LASF30
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1026   .debug_str:000000000000028a .LASF31
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:996    .debug_str:00000000000000f8 .LASF32
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:946    .debug_ranges:0000000000000000 .Ldebug_ranges0
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:964    .debug_line:0000000000000000 .Ldebug_line0
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:998    .debug_str:000000000000013a .LASF0
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1030   .debug_str:00000000000002de .LASF1
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:970    .debug_str:000000000000002c .LASF6
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:982    .debug_str:000000000000009a .LASF2
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1014   .debug_str:00000000000001be .LASF3
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:986    .debug_str:00000000000000ba .LASF4
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1024   .debug_str:0000000000000281 .LASF5
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:994    .debug_str:00000000000000ed .LASF7
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:984    .debug_str:00000000000000a8 .LASF8
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:966    .debug_str:0000000000000000 .LASF9
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1002   .debug_str:000000000000015f .LASF10
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1004   .debug_str:0000000000000176 .LASF11
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1022   .debug_str:0000000000000278 .LASF12
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1010   .debug_str:0000000000000195 .LASF33
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1028   .debug_str:00000000000002d2 .LASF13
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1006   .debug_str:000000000000017e .LASF14
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:171    .text.eclic_send_event:0000000000000000 .LFB8
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:190    .text.eclic_send_event:0000000000000006 .LFE8
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:175    .text.eclic_send_event:0000000000000000 .LBB4
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:186    .text.eclic_send_event:0000000000000004 .LBE4
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:992    .debug_str:00000000000000e7 .LASF23
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:972    .debug_str:0000000000000036 .LASF34
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:148    .text.eclic_system_reset:0000000000000000 .LFB7
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:164    .text.eclic_system_reset:0000000000000014 .LFE7
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:978    .debug_str:000000000000007f .LASF15
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:133    .text.eclic_irq_disable:0000000000000000 .LFB6
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:141    .text.eclic_irq_disable:0000000000000008 .LFE6
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1032   .debug_str:00000000000002ea .LASF17
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:825    .debug_loc:0000000000000000 .LLST5
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s 			page 9
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:563    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1020   .debug_str:00000000000001f3 .LASF30
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1026   .debug_str:000000000000028d .LASF31
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:988    .debug_str:00000000000000cd .LASF32
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:946    .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:964    .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:998    .debug_str:000000000000013d .LASF0
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1030   .debug_str:00000000000002e1 .LASF1
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:970    .debug_str:000000000000002c .LASF6
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:982    .debug_str:000000000000009a .LASF2
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1014   .debug_str:00000000000001c1 .LASF3
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:986    .debug_str:00000000000000ba .LASF4
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1024   .debug_str:0000000000000284 .LASF5
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:996    .debug_str:0000000000000132 .LASF7
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:984    .debug_str:00000000000000a8 .LASF8
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:966    .debug_str:0000000000000000 .LASF9
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1002   .debug_str:0000000000000162 .LASF10
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1004   .debug_str:0000000000000179 .LASF11
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1022   .debug_str:000000000000027b .LASF12
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1010   .debug_str:0000000000000198 .LASF33
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1028   .debug_str:00000000000002d5 .LASF13
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1006   .debug_str:0000000000000181 .LASF14
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:171    .text.eclic_send_event:0000000000000000 .LFB8
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:190    .text.eclic_send_event:0000000000000006 .LFE8
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:175    .text.eclic_send_event:0000000000000000 .LBB4
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:186    .text.eclic_send_event:0000000000000004 .LBE4
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:994    .debug_str:000000000000012c .LASF23
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:972    .debug_str:0000000000000036 .LASF34
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:148    .text.eclic_system_reset:0000000000000000 .LFB7
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:164    .text.eclic_system_reset:0000000000000014 .LFE7
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:978    .debug_str:000000000000007f .LASF15
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:133    .text.eclic_irq_disable:0000000000000000 .LFB6
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:141    .text.eclic_irq_disable:0000000000000008 .LFE6
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1032   .debug_str:00000000000002ed .LASF17
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:825    .debug_loc:0000000000000000 .LLST5
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s 			page 9
 
 
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:139    .text.eclic_irq_disable:0000000000000008 .LVL10
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:990    .debug_str:00000000000000d6 .LASF16
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:82     .text.eclic_irq_enable:0000000000000000 .LFB5
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:126    .text.eclic_irq_enable:0000000000000034 .LFE5
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:839    .debug_loc:0000000000000021 .LLST1
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:857    .debug_loc:000000000000004d .LLST2
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1008   .debug_str:000000000000018f .LASF18
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:879    .debug_loc:0000000000000084 .LLST3
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:988    .debug_str:00000000000000cd .LASF19
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:893    .debug_loc:00000000000000a5 .LLST4
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:101    .text.eclic_irq_enable:0000000000000014 .LVL5
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:106    .text.eclic_irq_enable:0000000000000020 .LVL6
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:124    .text.eclic_irq_enable:0000000000000034 .LVL8
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1012   .debug_str:00000000000001a5 .LASF20
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:67     .text.eclic_priority_group_set:0000000000000000 .LFB4
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:75     .text.eclic_priority_group_set:0000000000000008 .LFE4
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:980    .debug_str:0000000000000091 .LASF21
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:907    .debug_loc:00000000000000c6 .LLST0
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:73     .text.eclic_priority_group_set:0000000000000008 .LVL3
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:976    .debug_str:0000000000000060 .LASF22
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:41     .text.eclic_global_interrupt_disable:0000000000000000 .LFB3
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:60     .text.eclic_global_interrupt_disable:0000000000000006 .LFE3
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:45     .text.eclic_global_interrupt_disable:0000000000000000 .LBB3
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:56     .text.eclic_global_interrupt_disable:0000000000000004 .LBE3
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:968    .debug_str:000000000000000e .LASF24
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:14     .text.eclic_global_interrupt_enable:0000000000000000 .LFB2
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:34     .text.eclic_global_interrupt_enable:0000000000000006 .LFE2
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:19     .text.eclic_global_interrupt_enable:0000000000000000 .LBB2
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:30     .text.eclic_global_interrupt_enable:0000000000000004 .LBE2
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1000   .debug_str:0000000000000147 .LASF25
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:974    .debug_str:0000000000000049 .LASF26
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1034   .debug_str:00000000000002f1 .LASF27
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1016   .debug_str:00000000000001c8 .LASF28
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:1018   .debug_str:00000000000001df .LASF29
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:136    .text.eclic_irq_disable:0000000000000000 .LVL9
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:89     .text.eclic_irq_enable:0000000000000002 .LCFI0
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:120    .text.eclic_irq_enable:000000000000002c .LCFI1
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:85     .text.eclic_irq_enable:0000000000000000 .LVL4
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:113    .text.eclic_irq_enable:0000000000000026 .LVL7
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:70     .text.eclic_priority_group_set:0000000000000000 .LVL2
-C:\Users\zanil\AppData\Local\Temp\ccVmm8Bj.s:199    .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:139    .text.eclic_irq_disable:0000000000000008 .LVL10
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:992    .debug_str:000000000000011b .LASF16
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:82     .text.eclic_irq_enable:0000000000000000 .LFB5
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:126    .text.eclic_irq_enable:0000000000000034 .LFE5
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:839    .debug_loc:0000000000000021 .LLST1
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:857    .debug_loc:000000000000004d .LLST2
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1008   .debug_str:0000000000000192 .LASF18
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:879    .debug_loc:0000000000000084 .LLST3
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:990    .debug_str:0000000000000112 .LASF19
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:893    .debug_loc:00000000000000a5 .LLST4
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:101    .text.eclic_irq_enable:0000000000000014 .LVL5
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:106    .text.eclic_irq_enable:0000000000000020 .LVL6
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:124    .text.eclic_irq_enable:0000000000000034 .LVL8
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1012   .debug_str:00000000000001a8 .LASF20
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:67     .text.eclic_priority_group_set:0000000000000000 .LFB4
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:75     .text.eclic_priority_group_set:0000000000000008 .LFE4
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:980    .debug_str:0000000000000091 .LASF21
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:907    .debug_loc:00000000000000c6 .LLST0
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:73     .text.eclic_priority_group_set:0000000000000008 .LVL3
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:976    .debug_str:0000000000000060 .LASF22
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:41     .text.eclic_global_interrupt_disable:0000000000000000 .LFB3
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:60     .text.eclic_global_interrupt_disable:0000000000000006 .LFE3
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:45     .text.eclic_global_interrupt_disable:0000000000000000 .LBB3
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:56     .text.eclic_global_interrupt_disable:0000000000000004 .LBE3
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:968    .debug_str:000000000000000e .LASF24
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:14     .text.eclic_global_interrupt_enable:0000000000000000 .LFB2
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:34     .text.eclic_global_interrupt_enable:0000000000000006 .LFE2
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:19     .text.eclic_global_interrupt_enable:0000000000000000 .LBB2
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:30     .text.eclic_global_interrupt_enable:0000000000000004 .LBE2
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1000   .debug_str:000000000000014a .LASF25
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:974    .debug_str:0000000000000049 .LASF26
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1034   .debug_str:00000000000002f4 .LASF27
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1016   .debug_str:00000000000001cb .LASF28
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:1018   .debug_str:00000000000001e2 .LASF29
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:136    .text.eclic_irq_disable:0000000000000000 .LVL9
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:89     .text.eclic_irq_enable:0000000000000002 .LCFI0
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:120    .text.eclic_irq_enable:000000000000002c .LCFI1
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:85     .text.eclic_irq_enable:0000000000000000 .LVL4
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:113    .text.eclic_irq_enable:0000000000000026 .LVL7
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:70     .text.eclic_priority_group_set:0000000000000000 .LVL2
+C:\Users\zanil\AppData\Local\Temp\ccHroQUA.s:199    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 eclic_set_nlbits

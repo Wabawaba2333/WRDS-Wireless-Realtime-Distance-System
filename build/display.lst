@@ -1,0 +1,512 @@
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 1
+
+
+   1              		.file	"display.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv32i2p0_m2p0_a2p0_c2p0"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.section	.text.display_init,"ax",@progbits
+  10              		.align	1
+  11              		.globl	display_init
+  13              	display_init:
+  14              	.LFB2:
+  15              		.file 1 "display.c"
+   1:display.c     **** /**
+   2:display.c     ****  * @file    display.c
+   3:display.c     ****  * @brief   HC-SR04 LCD display module
+   4:display.c     ****  * @version 1.4
+   5:display.c     ****  * @date    2026-05-14
+   6:display.c     ****  */
+   7:display.c     **** 
+   8:display.c     **** #include "display.h"
+   9:display.c     **** #include "lcd.h"
+  10:display.c     **** 
+  11:display.c     **** #define HCSR04_DIST_ERROR  (-1)
+  12:display.c     **** #define NUM_X              (20U)
+  13:display.c     **** #define NUM_Y              (20U)
+  14:display.c     **** 
+  15:display.c     **** static int32_t last_distance = -2;
+  16:display.c     **** 
+  17:display.c     **** void display_init(void)
+  18:display.c     **** {
+  16              		.loc 1 18 1
+  17              		.cfi_startproc
+  19:display.c     ****     BACK_COLOR = BLACK;
+  18              		.loc 1 19 5
+  18:display.c     ****     BACK_COLOR = BLACK;
+  19              		.loc 1 18 1 is_stmt 0
+  20 0000 4111     		addi	sp,sp,-16
+  21              	.LCFI0:
+  22              		.cfi_def_cfa_offset 16
+  23              		.loc 1 19 16
+  24 0002 B7070000 		lui	a5,%hi(BACK_COLOR)
+  20:display.c     ****     LCD_Clear(BLACK);
+  25              		.loc 1 20 5
+  26 0006 0145     		li	a0,0
+  18:display.c     ****     BACK_COLOR = BLACK;
+  27              		.loc 1 18 1
+  28 0008 06C6     		sw	ra,12(sp)
+  29              		.cfi_offset 1, -4
+  19:display.c     ****     BACK_COLOR = BLACK;
+  30              		.loc 1 19 16
+  31 000a 23A00700 		sw	zero,%lo(BACK_COLOR)(a5)
+  32              		.loc 1 20 5 is_stmt 1
+  33 000e 97000000 		call	LCD_Clear
+  33      E7800000 
+  34              	.LVL0:
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 2
+
+
+  21:display.c     ****     //LCD_ShowStr(10U, LBL_Y, "Dist(cm):", WHITE, TRANSPARENT);
+  22:display.c     ****     LCD_Wait_On_Queue();
+  35              		.loc 1 22 5
+  23:display.c     **** }
+  36              		.loc 1 23 1 is_stmt 0
+  37 0016 B240     		lw	ra,12(sp)
+  38              		.cfi_restore 1
+  39 0018 4101     		addi	sp,sp,16
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 0
+  22:display.c     **** }
+  42              		.loc 1 22 5
+  43 001a 17030000 		tail	LCD_Wait_On_Queue
+  43      67000300 
+  44              	.LVL1:
+  45              		.cfi_endproc
+  46              	.LFE2:
+  48              		.section	.text.display_update,"ax",@progbits
+  49              		.align	1
+  50              		.globl	display_update
+  52              	display_update:
+  53              	.LFB3:
+  24:display.c     **** 
+  25:display.c     **** void display_update(int32_t distance)
+  26:display.c     **** {
+  54              		.loc 1 26 1 is_stmt 1
+  55              		.cfi_startproc
+  56              	.LVL2:
+  27:display.c     ****     if (distance == last_distance) { return; }
+  57              		.loc 1 27 5
+  58              		.loc 1 27 18 is_stmt 0
+  59 0000 B7070000 		lui	a5,%hi(.LANCHOR0)
+  60 0004 93870700 		addi	a5,a5,%lo(.LANCHOR0)
+  61              		.loc 1 27 8
+  62 0008 9843     		lw	a4,0(a5)
+  63 000a 630DA706 		beq	a4,a0,.L3
+  26:display.c     ****     if (distance == last_distance) { return; }
+  64              		.loc 1 26 1
+  65 000e 4111     		addi	sp,sp,-16
+  66              	.LCFI2:
+  67              		.cfi_def_cfa_offset 16
+  68 0010 22C4     		sw	s0,8(sp)
+  69 0012 06C6     		sw	ra,12(sp)
+  70              		.cfi_offset 8, -8
+  71              		.cfi_offset 1, -4
+  28:display.c     ****     last_distance = distance;
+  72              		.loc 1 28 19
+  73 0014 88C3     		sw	a0,0(a5)
+  29:display.c     **** 
+  30:display.c     ****     if (distance == HCSR04_DIST_ERROR)
+  74              		.loc 1 30 8
+  75 0016 FD57     		li	a5,-1
+  76 0018 2A84     		mv	s0,a0
+  28:display.c     ****     last_distance = distance;
+  77              		.loc 1 28 5 is_stmt 1
+  78              		.loc 1 30 5
+  31:display.c     ****     {
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 3
+
+
+  32:display.c     ****         LCD_ShowNum(0, 0, 0U, 4U, BLACK);                  /* clear stale number */
+  79              		.loc 1 32 9 is_stmt 0
+  80 001a 0147     		li	a4,0
+  30:display.c     ****     {
+  81              		.loc 1 30 8
+  82 001c 631AF502 		bne	a0,a5,.L5
+  83              		.loc 1 32 9 is_stmt 1
+  84 0020 9146     		li	a3,4
+  85 0022 0146     		li	a2,0
+  86 0024 8145     		li	a1,0
+  87 0026 0145     		li	a0,0
+  88              	.LVL3:
+  89 0028 97000000 		call	LCD_ShowNum
+  89      E7800000 
+  90              	.LVL4:
+  33:display.c     ****         LCD_ShowStr(NUM_Y, NUM_Y, " ERR ", GREEN, OPAQUE);
+  91              		.loc 1 33 9
+  34:display.c     ****     }
+  35:display.c     ****     else
+  36:display.c     ****     {
+  37:display.c     ****         LCD_ShowStr(NUM_Y, NUM_Y, "     ", GREEN, OPAQUE); /* clear stale ERR */
+  38:display.c     ****         LCD_ShowNum(0, 0, (uint16_t)distance, 4U, WHITE);
+  39:display.c     ****     }
+  40:display.c     **** }
+  92              		.loc 1 40 1 is_stmt 0
+  93 0030 2244     		lw	s0,8(sp)
+  94              		.cfi_remember_state
+  95              		.cfi_restore 8
+  96              	.LVL5:
+  97 0032 B240     		lw	ra,12(sp)
+  98              		.cfi_restore 1
+  33:display.c     ****         LCD_ShowStr(NUM_Y, NUM_Y, " ERR ", GREEN, OPAQUE);
+  99              		.loc 1 33 9
+ 100 0034 37060000 		lui	a2,%hi(.LC0)
+ 101              		.loc 1 40 1
+  33:display.c     ****         LCD_ShowStr(NUM_Y, NUM_Y, " ERR ", GREEN, OPAQUE);
+ 102              		.loc 1 33 9
+ 103 0038 0147     		li	a4,0
+ 104 003a 9306007E 		li	a3,2016
+ 105 003e 13060600 		addi	a2,a2,%lo(.LC0)
+ 106 0042 D145     		li	a1,20
+ 107 0044 5145     		li	a0,20
+ 108              		.loc 1 40 1
+ 109 0046 4101     		addi	sp,sp,16
+ 110              	.LCFI3:
+ 111              		.cfi_def_cfa_offset 0
+  33:display.c     ****         LCD_ShowStr(NUM_Y, NUM_Y, " ERR ", GREEN, OPAQUE);
+ 112              		.loc 1 33 9
+ 113 0048 17030000 		tail	LCD_ShowStr
+ 113      67000300 
+ 114              	.LVL6:
+ 115              	.L5:
+ 116              	.LCFI4:
+ 117              		.cfi_restore_state
+  37:display.c     ****         LCD_ShowNum(0, 0, (uint16_t)distance, 4U, WHITE);
+ 118              		.loc 1 37 9 is_stmt 1
+ 119 0050 37060000 		lui	a2,%hi(.LC1)
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 4
+
+
+ 120 0054 9306007E 		li	a3,2016
+ 121 0058 13060600 		addi	a2,a2,%lo(.LC1)
+ 122 005c D145     		li	a1,20
+ 123 005e 5145     		li	a0,20
+ 124 0060 97000000 		call	LCD_ShowStr
+ 124      E7800000 
+ 125              	.LVL7:
+  38:display.c     ****     }
+ 126              		.loc 1 38 9
+ 127 0068 4167     		li	a4,65536
+ 128 006a 7D17     		addi	a4,a4,-1
+ 129 006c 3376E400 		and	a2,s0,a4
+ 130              		.loc 1 40 1 is_stmt 0
+ 131 0070 2244     		lw	s0,8(sp)
+ 132              		.cfi_restore 8
+ 133              	.LVL8:
+ 134 0072 B240     		lw	ra,12(sp)
+ 135              		.cfi_restore 1
+  38:display.c     ****     }
+ 136              		.loc 1 38 9
+ 137 0074 9146     		li	a3,4
+ 138              		.loc 1 40 1
+  38:display.c     ****     }
+ 139              		.loc 1 38 9
+ 140 0076 8145     		li	a1,0
+ 141 0078 0145     		li	a0,0
+ 142              		.loc 1 40 1
+ 143 007a 4101     		addi	sp,sp,16
+ 144              	.LCFI5:
+ 145              		.cfi_def_cfa_offset 0
+  38:display.c     ****     }
+ 146              		.loc 1 38 9
+ 147 007c 17030000 		tail	LCD_ShowNum
+ 147      67000300 
+ 148              	.LVL9:
+ 149              	.L3:
+ 150 0084 8280     		ret
+ 151              		.cfi_endproc
+ 152              	.LFE3:
+ 154              		.section	.rodata.display_update.str1.4,"aMS",@progbits,1
+ 155              		.align	2
+ 156              	.LC0:
+ 157 0000 20455252 		.string	" ERR "
+ 157      2000
+ 158 0006 0000     		.zero	2
+ 159              	.LC1:
+ 160 0008 20202020 		.string	"     "
+ 160      2000
+ 161              		.section	.sdata.last_distance,"aw"
+ 162              		.align	2
+ 163              		.set	.LANCHOR0,. + 0
+ 166              	last_distance:
+ 167 0000 FEFFFFFF 		.word	-2
+ 168              		.text
+ 169              	.Letext0:
+ 170              		.file 2 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 171              		.file 3 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 5
+
+
+ 172              		.file 4 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\lib\\gcc\\riscv64-unkn
+ 173              		.file 5 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 174              		.file 6 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 175              		.file 7 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 176              		.file 8 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 177              		.file 9 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
+ 178              		.file 10 "lcd.h"
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 display.c
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:13     .text.display_init:0000000000000000 display_init
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:17     .text.display_init:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:18     .text.display_init:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:19     .text.display_init:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:20     .text.display_init:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:22     .text.display_init:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:24     .text.display_init:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:26     .text.display_init:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:28     .text.display_init:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:29     .text.display_init:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:31     .text.display_init:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:33     .text.display_init:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:36     .text.display_init:0000000000000016 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:37     .text.display_init:0000000000000016 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:38     .text.display_init:0000000000000018 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:41     .text.display_init:000000000000001a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:43     .text.display_init:000000000000001a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:45     .text.display_init:0000000000000022 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:52     .text.display_update:0000000000000000 display_update
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:55     .text.display_update:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:57     .text.display_update:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:58     .text.display_update:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:59     .text.display_update:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:62     .text.display_update:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:65     .text.display_update:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:67     .text.display_update:0000000000000010 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:70     .text.display_update:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:71     .text.display_update:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:73     .text.display_update:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:75     .text.display_update:0000000000000016 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:78     .text.display_update:000000000000001a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:79     .text.display_update:000000000000001a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:80     .text.display_update:000000000000001a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:82     .text.display_update:000000000000001c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:84     .text.display_update:0000000000000020 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:92     .text.display_update:0000000000000030 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:93     .text.display_update:0000000000000030 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:94     .text.display_update:0000000000000032 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:95     .text.display_update:0000000000000032 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:98     .text.display_update:0000000000000034 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:100    .text.display_update:0000000000000034 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:102    .text.display_update:0000000000000038 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:103    .text.display_update:0000000000000038 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:109    .text.display_update:0000000000000046 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:111    .text.display_update:0000000000000048 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:113    .text.display_update:0000000000000048 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:117    .text.display_update:0000000000000050 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:119    .text.display_update:0000000000000050 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:127    .text.display_update:0000000000000068 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:131    .text.display_update:0000000000000070 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:132    .text.display_update:0000000000000072 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:135    .text.display_update:0000000000000074 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:137    .text.display_update:0000000000000074 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:139    .text.display_update:0000000000000076 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:140    .text.display_update:0000000000000076 .L0 
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 7
+
+
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:143    .text.display_update:000000000000007a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:145    .text.display_update:000000000000007c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:147    .text.display_update:000000000000007c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:151    .text.display_update:0000000000000086 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:163    .sdata.last_distance:0000000000000000 .LANCHOR0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:166    .sdata.last_distance:0000000000000000 last_distance
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:48     .text.display_init:0000000000000022 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:154    .text.display_update:0000000000000086 .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:156    .rodata.display_update.str1.4:0000000000000000 .LC0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:159    .rodata.display_update.str1.4:0000000000000008 .LC1
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:149    .text.display_update:0000000000000084 .L3
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:115    .text.display_update:0000000000000050 .L5
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:1860   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2756   .debug_str:00000000000004a7 .LASF137
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2804   .debug_str:0000000000000618 .LASF138
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2682   .debug_str:0000000000000317 .LASF139
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2512   .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2520   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2558   .debug_str:00000000000000cc .LASF0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2532   .debug_str:0000000000000031 .LASF3
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2678   .debug_str:0000000000000303 .LASF1
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2524   .debug_str:000000000000000c .LASF2
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2744   .debug_str:000000000000046c .LASF4
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2762   .debug_str:0000000000000544 .LASF5
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2646   .debug_str:0000000000000258 .LASF6
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2536   .debug_str:0000000000000044 .LASF7
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2598   .debug_str:0000000000000186 .LASF8
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2620   .debug_str:00000000000001e5 .LASF9
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2584   .debug_str:000000000000013b .LASF10
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2542   .debug_str:000000000000006d .LASF11
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2742   .debug_str:000000000000045f .LASF12
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2746   .debug_str:0000000000000477 .LASF13
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2586   .debug_str:0000000000000149 .LASF14
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2676   .debug_str:00000000000002fb .LASF15
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2774   .debug_str:0000000000000591 .LASF16
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2732   .debug_str:0000000000000438 .LASF17
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2670   .debug_str:00000000000002d8 .LASF18
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2554   .debug_str:00000000000000be .LASF19
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2728   .debug_str:0000000000000421 .LASF20
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2782   .debug_str:00000000000005b2 .LASF21
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2636   .debug_str:0000000000000236 .LASF22
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2612   .debug_str:00000000000001be .LASF23
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2720   .debug_str:0000000000000401 .LASF24
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2722   .debug_str:0000000000000409 .LASF25
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2696   .debug_str:000000000000038e .LASF26
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2768   .debug_str:0000000000000569 .LASF27
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2674   .debug_str:00000000000002e9 .LASF28
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2686   .debug_str:0000000000000365 .LASF29
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2606   .debug_str:00000000000001ab .LASF34
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2752   .debug_str:0000000000000494 .LASF30
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2714   .debug_str:00000000000003ec .LASF31
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2600   .debug_str:0000000000000191 .LASF32
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2778   .debug_str:00000000000005a7 .LASF33
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2610   .debug_str:00000000000001b9 .LASF35
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2552   .debug_str:00000000000000b5 .LASF36
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2796   .debug_str:00000000000005f7 .LASF37
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 8
+
+
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2564   .debug_str:00000000000000e4 .LASF38
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2806   .debug_str:0000000000000622 .LASF39
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2660   .debug_str:00000000000002a3 .LASF40
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2650   .debug_str:0000000000000269 .LASF41
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2726   .debug_str:0000000000000417 .LASF42
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2688   .debug_str:000000000000036e .LASF43
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2792   .debug_str:00000000000005dd .LASF44
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2568   .debug_str:00000000000000f3 .LASF45
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2526   .debug_str:0000000000000016 .LASF46
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2522   .debug_str:0000000000000000 .LASF47
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2758   .debug_str:000000000000052f .LASF48
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2578   .debug_str:0000000000000122 .LASF49
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2662   .debug_str:00000000000002ac .LASF50
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2706   .debug_str:00000000000003bc .LASF51
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2596   .debug_str:0000000000000181 .LASF52
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2690   .debug_str:0000000000000378 .LASF53
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2562   .debug_str:00000000000000de .LASF54
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2740   .debug_str:0000000000000459 .LASF55
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2698   .debug_str:0000000000000399 .LASF56
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2576   .debug_str:000000000000011b .LASF57
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2622   .debug_str:00000000000001f7 .LASF58
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2544   .debug_str:0000000000000084 .LASF59
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2570   .debug_str:0000000000000101 .LASF60
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2608   .debug_str:00000000000001b3 .LASF61
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2648   .debug_str:0000000000000262 .LASF62
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2724   .debug_str:0000000000000411 .LASF63
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2556   .debug_str:00000000000000c5 .LASF64
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2560   .debug_str:00000000000000d8 .LASF65
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2788   .debug_str:00000000000005cf .LASF66
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2738   .debug_str:0000000000000450 .LASF67
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2590   .debug_str:000000000000015a .LASF68
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2624   .debug_str:00000000000001fd .LASF69
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2642   .debug_str:000000000000024c .LASF70
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2700   .debug_str:00000000000003a1 .LASF71
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2692   .debug_str:000000000000037f .LASF72
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2716   .debug_str:00000000000003f4 .LASF73
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2734   .debug_str:0000000000000444 .LASF74
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2580   .debug_str:000000000000012a .LASF75
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2616   .debug_str:00000000000001d5 .LASF76
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2604   .debug_str:00000000000001a3 .LASF77
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2704   .debug_str:00000000000003b7 .LASF78
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2530   .debug_str:0000000000000026 .LASF79
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2712   .debug_str:00000000000003d3 .LASF80
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2708   .debug_str:00000000000003c1 .LASF81
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2666   .debug_str:00000000000002be .LASF82
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2710   .debug_str:00000000000003c9 .LASF83
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2634   .debug_str:000000000000022e .LASF84
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2582   .debug_str:0000000000000131 .LASF85
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2802   .debug_str:0000000000000613 .LASF86
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2672   .debug_str:00000000000002df .LASF87
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2618   .debug_str:00000000000001dd .LASF88
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2588   .debug_str:0000000000000152 .LASF89
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2640   .debug_str:0000000000000247 .LASF90
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2534   .debug_str:000000000000003b .LASF91
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2786   .debug_str:00000000000005c5 .LASF92
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2572   .debug_str:0000000000000109 .LASF93
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2566   .debug_str:00000000000000ee .LASF94
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 9
+
+
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2736   .debug_str:000000000000044b .LASF95
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2694   .debug_str:0000000000000387 .LASF96
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2780   .debug_str:00000000000005ac .LASF97
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2626   .debug_str:0000000000000203 .LASF98
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2680   .debug_str:0000000000000311 .LASF99
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2528   .debug_str:000000000000001e .LASF100
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2718   .debug_str:00000000000003fb .LASF101
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2644   .debug_str:0000000000000252 .LASF102
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2764   .debug_str:0000000000000557 .LASF103
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2776   .debug_str:000000000000059a .LASF104
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2754   .debug_str:000000000000049a .LASF105
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2632   .debug_str:0000000000000221 .LASF106
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2794   .debug_str:00000000000005e8 .LASF107
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2668   .debug_str:00000000000002c9 .LASF108
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2628   .debug_str:000000000000020a .LASF109
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2798   .debug_str:0000000000000600 .LASF110
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2702   .debug_str:00000000000003aa .LASF111
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2800   .debug_str:0000000000000605 .LASF112
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2550   .debug_str:00000000000000a7 .LASF113
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2784   .debug_str:00000000000005bb .LASF114
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2630   .debug_str:0000000000000215 .LASF115
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2770   .debug_str:0000000000000571 .LASF116
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2594   .debug_str:0000000000000173 .LASF117
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2548   .debug_str:0000000000000098 .LASF118
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2592   .debug_str:0000000000000162 .LASF119
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2538   .debug_str:000000000000004d .LASF120
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2540   .debug_str:000000000000005c .LASF121
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2684   .debug_str:000000000000035c .LASF122
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2658   .debug_str:000000000000029c .LASF123
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2652   .debug_str:0000000000000273 .LASF124
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2790   .debug_str:00000000000005d5 .LASF125
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2546   .debug_str:000000000000008d .LASF140
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2602   .debug_str:0000000000000197 .LASF126
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2772   .debug_str:000000000000057e .LASF127
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2664   .debug_str:00000000000002b4 .LASF128
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2614   .debug_str:00000000000001c5 .LASF129
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2638   .debug_str:000000000000023c .LASF130
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2656   .debug_str:000000000000028e .LASF141
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2730   .debug_str:0000000000000429 .LASF131
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:53     .text.display_update:0000000000000000 .LFB3
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:152    .text.display_update:0000000000000086 .LFE3
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2418   .debug_loc:0000000000000000 .LLST1
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2750   .debug_str:000000000000048b .LASF142
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2446   .debug_loc:0000000000000044 .LLST2
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:90     .text.display_update:0000000000000030 .LVL4
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:114    .text.display_update:0000000000000050 .LVL6
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:125    .text.display_update:0000000000000068 .LVL7
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:148    .text.display_update:0000000000000084 .LVL9
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2766   .debug_str:000000000000055c .LASF132
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:14     .text.display_init:0000000000000000 .LFB2
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:46     .text.display_init:0000000000000022 .LFE2
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2479   .debug_loc:0000000000000094 .LLST0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:34     .text.display_init:0000000000000016 .LVL0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:44     .text.display_init:0000000000000022 .LVL1
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2760   .debug_str:0000000000000538 .LASF133
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2748   .debug_str:000000000000047f .LASF134
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2574   .debug_str:0000000000000111 .LASF135
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccxidizB.s 			page 10
+
+
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:2654   .debug_str:000000000000027c .LASF136
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:66     .text.display_update:0000000000000010 .LCFI2
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:110    .text.display_update:0000000000000048 .LCFI3
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:116    .text.display_update:0000000000000050 .LCFI4
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:144    .text.display_update:000000000000007c .LCFI5
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:56     .text.display_update:0000000000000000 .LVL2
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:88     .text.display_update:0000000000000028 .LVL3
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:96     .text.display_update:0000000000000032 .LVL5
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:133    .text.display_update:0000000000000072 .LVL8
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:21     .text.display_init:0000000000000002 .LCFI0
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:40     .text.display_init:000000000000001a .LCFI1
+C:\Users\zanil\AppData\Local\Temp\ccxidizB.s:180    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+BACK_COLOR
+LCD_Clear
+LCD_Wait_On_Queue
+LCD_ShowNum
+LCD_ShowStr

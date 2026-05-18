@@ -1,0 +1,1325 @@
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 1
+
+
+   1              		.file	"hcsr04.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv32i2p0_m2p0_a2p0_c2p0"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.section	.text.hcsr04_init,"ax",@progbits
+  10              		.align	1
+  11              		.globl	hcsr04_init
+  13              	hcsr04_init:
+  14              	.LFB4:
+  15              		.file 1 "hcsr04.c"
+   1:hcsr04.c      **** #include "hcsr04.h"
+   2:hcsr04.c      **** #include "gd32vf103.h"
+   3:hcsr04.c      **** #include <string.h>
+   4:hcsr04.c      **** 
+   5:hcsr04.c      **** #define MTIME_LO (*(volatile uint32_t*)0xD1000000) /* MISRA Rule 11.4 deviation: hardware register 
+   6:hcsr04.c      **** 
+   7:hcsr04.c      **** #define TICK_PER_MS   (27000U)
+   8:hcsr04.c      **** #define TIME_OUT_30MS (810000U)   /* 30ms — waiting for echo to start (STATE_ECHO_HIGH) */
+   9:hcsr04.c      **** #define TIME_OUT_40MS (1080000U)  /* 40ms — waiting for echo to end; covers HC-SR04's 38ms no-obj
+  10:hcsr04.c      **** #define WINDOW_SIZE 5
+  11:hcsr04.c      **** 
+  12:hcsr04.c      **** /**
+  13:hcsr04.c      ****  * @file    hcsr04.c
+  14:hcsr04.c      ****  * @brief   HC-SR04 ultrasonic sensor FSM driver
+  15:hcsr04.c      ****  * @version 1.0
+  16:hcsr04.c      ****  * @date    2026-05-14
+  17:hcsr04.c      ****  */
+  18:hcsr04.c      **** 
+  19:hcsr04.c      **** typedef enum status
+  20:hcsr04.c      **** {
+  21:hcsr04.c      ****     STATE_IDLE,
+  22:hcsr04.c      ****     STATE_TRIG_START,
+  23:hcsr04.c      ****     STATE_TRIG_WAIT,
+  24:hcsr04.c      ****     STATE_TRIG_GUARD,
+  25:hcsr04.c      ****     STATE_ECHO_HIGH,
+  26:hcsr04.c      ****     STATE_ECHO_LOW,
+  27:hcsr04.c      ****     STATE_ERROR
+  28:hcsr04.c      **** } hcsr04state;
+  29:hcsr04.c      **** 
+  30:hcsr04.c      **** static hcsr04state current_state = STATE_IDLE;
+  31:hcsr04.c      **** static uint32_t start_time = 0;
+  32:hcsr04.c      **** static uint32_t end_time = 0;
+  33:hcsr04.c      **** static int32_t distance= 0;
+  34:hcsr04.c      **** static uint32_t error_count = 0;
+  35:hcsr04.c      **** 
+  36:hcsr04.c      **** static uint32_t last_trig_time = 0;
+  37:hcsr04.c      **** static int32_t filter_buffer[WINDOW_SIZE] = {0};
+  38:hcsr04.c      **** static uint8_t filter_idx = 0;
+  39:hcsr04.c      **** 
+  40:hcsr04.c      **** static int32_t apply_median_filter(int32_t raw_val) 
+  41:hcsr04.c      **** {
+  42:hcsr04.c      ****     filter_buffer[filter_idx] = raw_val;
+  43:hcsr04.c      ****     filter_idx = (filter_idx + 1) % WINDOW_SIZE;
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 2
+
+
+  44:hcsr04.c      ****     
+  45:hcsr04.c      ****     int32_t sorted[WINDOW_SIZE];
+  46:hcsr04.c      ****     memcpy(sorted, filter_buffer, sizeof(sorted));
+  47:hcsr04.c      ****     
+  48:hcsr04.c      ****     for (int i = 0; i < WINDOW_SIZE - 1; i++) 
+  49:hcsr04.c      ****     {
+  50:hcsr04.c      ****         for (int j = 0; j < WINDOW_SIZE - 1 - i; j++) 
+  51:hcsr04.c      ****         {
+  52:hcsr04.c      ****             if (sorted[j] > sorted[j+1]) 
+  53:hcsr04.c      ****             {
+  54:hcsr04.c      ****                 int32_t tmp = sorted[j];
+  55:hcsr04.c      ****                 sorted[j] = sorted[j+1];
+  56:hcsr04.c      ****                 sorted[j+1] = tmp;
+  57:hcsr04.c      ****             }
+  58:hcsr04.c      ****         }
+  59:hcsr04.c      ****     }
+  60:hcsr04.c      ****     return sorted[WINDOW_SIZE / 2];
+  61:hcsr04.c      **** }
+  62:hcsr04.c      **** 
+  63:hcsr04.c      **** void hcsr04_init(void)
+  64:hcsr04.c      **** {
+  16              		.loc 1 64 1
+  17              		.cfi_startproc
+  65:hcsr04.c      ****     rcu_periph_clock_enable(RCU_GPIOA);
+  18              		.loc 1 65 5
+  64:hcsr04.c      ****     rcu_periph_clock_enable(RCU_GPIOA);
+  19              		.loc 1 64 1 is_stmt 0
+  20 0000 4111     		addi	sp,sp,-16
+  21              	.LCFI0:
+  22              		.cfi_def_cfa_offset 16
+  23              		.loc 1 65 5
+  24 0002 13052060 		li	a0,1538
+  64:hcsr04.c      ****     rcu_periph_clock_enable(RCU_GPIOA);
+  25              		.loc 1 64 1
+  26 0006 06C6     		sw	ra,12(sp)
+  27 0008 22C4     		sw	s0,8(sp)
+  28              		.cfi_offset 1, -4
+  29              		.cfi_offset 8, -8
+  30              		.loc 1 65 5
+  31 000a 97000000 		call	rcu_periph_clock_enable
+  31      E7800000 
+  32              	.LVL0:
+  66:hcsr04.c      **** 
+  67:hcsr04.c      ****     gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_0);
+  33              		.loc 1 67 5 is_stmt 1
+  34 0012 37140140 		li	s0,1073811456
+  35 0016 13050480 		addi	a0,s0,-2048
+  36 001a 8546     		li	a3,1
+  37 001c 0D46     		li	a2,3
+  38 001e C145     		li	a1,16
+  39 0020 97000000 		call	gpio_init
+  39      E7800000 
+  40              	.LVL1:
+  68:hcsr04.c      ****     gpio_init(GPIOA, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, GPIO_PIN_1);
+  41              		.loc 1 68 5
+  42 0028 13050480 		addi	a0,s0,-2048
+  69:hcsr04.c      **** }
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 3
+
+
+  43              		.loc 1 69 1 is_stmt 0
+  44 002c 2244     		lw	s0,8(sp)
+  45              		.cfi_restore 8
+  46 002e B240     		lw	ra,12(sp)
+  47              		.cfi_restore 1
+  68:hcsr04.c      ****     gpio_init(GPIOA, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, GPIO_PIN_1);
+  48              		.loc 1 68 5
+  49 0030 8946     		li	a3,2
+  50              		.loc 1 69 1
+  68:hcsr04.c      ****     gpio_init(GPIOA, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, GPIO_PIN_1);
+  51              		.loc 1 68 5
+  52 0032 0D46     		li	a2,3
+  53 0034 9145     		li	a1,4
+  54              		.loc 1 69 1
+  55 0036 4101     		addi	sp,sp,16
+  56              	.LCFI1:
+  57              		.cfi_def_cfa_offset 0
+  68:hcsr04.c      ****     gpio_init(GPIOA, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, GPIO_PIN_1);
+  58              		.loc 1 68 5
+  59 0038 17030000 		tail	gpio_init
+  59      67000300 
+  60              	.LVL2:
+  61              		.cfi_endproc
+  62              	.LFE4:
+  64              		.section	.text.hcsr04_get_distance,"ax",@progbits
+  65              		.align	1
+  66              		.globl	hcsr04_get_distance
+  68              	hcsr04_get_distance:
+  69              	.LFB5:
+  70:hcsr04.c      **** 
+  71:hcsr04.c      **** int32_t hcsr04_get_distance(void)  {return distance;}
+  70              		.loc 1 71 36 is_stmt 1
+  71              		.cfi_startproc
+  72              		.loc 1 71 37
+  73              		.loc 1 71 1 is_stmt 0
+  74 0000 B7070000 		lui	a5,%hi(.LANCHOR0)
+  75 0004 03A50700 		lw	a0,%lo(.LANCHOR0)(a5)
+  76 0008 8280     		ret
+  77              		.cfi_endproc
+  78              	.LFE5:
+  80              		.section	.text.hcsr04_tick,"ax",@progbits
+  81              		.align	1
+  82              		.globl	hcsr04_tick
+  84              	hcsr04_tick:
+  85              	.LFB6:
+  72:hcsr04.c      **** 
+  73:hcsr04.c      **** void hcsr04_tick(void)
+  74:hcsr04.c      **** {
+  86              		.loc 1 74 1 is_stmt 1
+  87              		.cfi_startproc
+  75:hcsr04.c      ****     switch(current_state)
+  88              		.loc 1 75 5
+  74:hcsr04.c      ****     switch(current_state)
+  89              		.loc 1 74 1 is_stmt 0
+  90 0000 7971     		addi	sp,sp,-48
+  91              	.LCFI2:
+  92              		.cfi_def_cfa_offset 48
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 4
+
+
+  93 0002 22D4     		sw	s0,40(sp)
+  94              		.cfi_offset 8, -8
+  95              		.loc 1 75 5
+  96 0004 37040000 		lui	s0,%hi(.LANCHOR1)
+  97 0008 13070400 		addi	a4,s0,%lo(.LANCHOR1)
+  98 000c 1C43     		lw	a5,0(a4)
+  74:hcsr04.c      ****     switch(current_state)
+  99              		.loc 1 74 1
+ 100 000e 06D6     		sw	ra,44(sp)
+ 101 0010 26D2     		sw	s1,36(sp)
+ 102 0012 4AD0     		sw	s2,32(sp)
+ 103              		.cfi_offset 1, -4
+ 104              		.cfi_offset 9, -12
+ 105              		.cfi_offset 18, -16
+ 106              		.loc 1 75 5
+ 107 0014 9946     		li	a3,6
+ 108 0016 63E9F61E 		bgtu	a5,a3,.L5
+ 109 001a 37070000 		lui	a4,%hi(.L7)
+ 110 001e 8A07     		slli	a5,a5,2
+ 111 0020 13070700 		addi	a4,a4,%lo(.L7)
+ 112 0024 BA97     		add	a5,a5,a4
+ 113 0026 9C43     		lw	a5,0(a5)
+ 114 0028 13040400 		addi	s0,s0,%lo(.LANCHOR1)
+ 115 002c 8287     		jr	a5
+ 116              		.section	.rodata.hcsr04_tick,"a",@progbits
+ 117              		.align	2
+ 118              		.align	2
+ 119              	.L7:
+ 120 0000 00000000 		.word	.L13
+ 121 0004 00000000 		.word	.L12
+ 122 0008 00000000 		.word	.L11
+ 123 000c 00000000 		.word	.L10
+ 124 0010 00000000 		.word	.L9
+ 125 0014 00000000 		.word	.L8
+ 126 0018 00000000 		.word	.L6
+ 127              		.section	.text.hcsr04_tick
+ 128              	.L13:
+  76:hcsr04.c      ****     {
+  77:hcsr04.c      ****         case STATE_IDLE:
+  78:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 100U * TICK_PER_MS) //wait for 100ms
+ 129              		.loc 1 78 9 is_stmt 1
+ 130              		.loc 1 78 12 is_stmt 0
+ 131 002e B70700D1 		li	a5,-788529152
+ 132 0032 9843     		lw	a4,0(a5)
+ 133              		.loc 1 78 21
+ 134 0034 B7070000 		lui	a5,%hi(.LANCHOR2)
+ 135 0038 83A70700 		lw	a5,%lo(.LANCHOR2)(a5)
+ 136 003c 1D8F     		sub	a4,a4,a5
+ 137              		.loc 1 78 11
+ 138 003e B7372900 		li	a5,2699264
+ 139 0042 9387F72D 		addi	a5,a5,735
+ 140 0046 63F4E700 		bleu	a4,a5,.L4
+  79:hcsr04.c      ****         {current_state = STATE_TRIG_START;}
+ 141              		.loc 1 79 10 is_stmt 1
+ 142              		.loc 1 79 24 is_stmt 0
+ 143 004a 8547     		li	a5,1
+ 144              	.L29:
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 5
+
+
+  80:hcsr04.c      ****         break;
+  81:hcsr04.c      **** 
+  82:hcsr04.c      ****         case STATE_TRIG_START:
+  83:hcsr04.c      ****         gpio_bit_set(GPIOA, GPIO_PIN_0);
+  84:hcsr04.c      ****         last_trig_time = MTIME_LO;
+  85:hcsr04.c      ****         current_state = STATE_TRIG_WAIT;
+ 145              		.loc 1 85 23
+ 146 004c 1CC0     		sw	a5,0(s0)
+  86:hcsr04.c      ****         break;
+ 147              		.loc 1 86 9 is_stmt 1
+ 148              	.L4:
+  87:hcsr04.c      **** 
+  88:hcsr04.c      ****         case STATE_TRIG_WAIT:
+  89:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 270U) //10µs
+  90:hcsr04.c      ****         {
+  91:hcsr04.c      ****             gpio_bit_reset(GPIOA, GPIO_PIN_0);
+  92:hcsr04.c      ****             last_trig_time = MTIME_LO;
+  93:hcsr04.c      ****             current_state = STATE_TRIG_GUARD;
+  94:hcsr04.c      ****         }
+  95:hcsr04.c      ****         break;
+  96:hcsr04.c      **** 
+  97:hcsr04.c      ****         case STATE_TRIG_GUARD: /* wait 300µs after TRIG falls — ignores capacitive coupling glit
+  98:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 8100U) /* 300µs × 27 ticks/µs */
+  99:hcsr04.c      ****         { current_state = STATE_ECHO_HIGH; }
+ 100:hcsr04.c      ****         break;
+ 101:hcsr04.c      **** 
+ 102:hcsr04.c      ****         case STATE_ECHO_HIGH:
+ 103:hcsr04.c      ****         if(gpio_input_bit_get(GPIOA,GPIO_PIN_1) == SET)
+ 104:hcsr04.c      ****         {
+ 105:hcsr04.c      ****             start_time = MTIME_LO;
+ 106:hcsr04.c      ****             current_state = STATE_ECHO_LOW;
+ 107:hcsr04.c      ****         }
+ 108:hcsr04.c      **** 
+ 109:hcsr04.c      ****         else if(MTIME_LO - last_trig_time > TIME_OUT_30MS) //1s = 2700 0000 tck, 1ms = 27000 tck
+ 110:hcsr04.c      ****         {current_state = STATE_ERROR;}
+ 111:hcsr04.c      ****         break;
+ 112:hcsr04.c      **** 
+ 113:hcsr04.c      ****         case STATE_ECHO_LOW:
+ 114:hcsr04.c      ****         if(gpio_input_bit_get(GPIOA,GPIO_PIN_1) == RESET)
+ 115:hcsr04.c      ****         {
+ 116:hcsr04.c      ****             end_time = MTIME_LO;
+ 117:hcsr04.c      ****             
+ 118:hcsr04.c      ****             int32_t raw_distance = (int32_t)((end_time - start_time) / 157U); /* cm: 27MHz × 58µs
+ 119:hcsr04.c      ****             distance = apply_median_filter(raw_distance); 
+ 120:hcsr04.c      ****             
+ 121:hcsr04.c      ****             error_count = 0;
+ 122:hcsr04.c      ****             current_state = STATE_IDLE;
+ 123:hcsr04.c      ****         }
+ 124:hcsr04.c      **** 
+ 125:hcsr04.c      ****         else if(MTIME_LO - start_time > TIME_OUT_40MS)
+ 126:hcsr04.c      ****         {current_state = STATE_ERROR;}
+ 127:hcsr04.c      ****         break;
+ 128:hcsr04.c      ****         
+ 129:hcsr04.c      ****         case STATE_ERROR:
+ 130:hcsr04.c      ****         if(error_count < 250U)
+ 131:hcsr04.c      ****         {error_count++;}
+ 132:hcsr04.c      **** 
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 6
+
+
+ 133:hcsr04.c      ****         if(error_count > 3U)
+ 134:hcsr04.c      ****         {distance = -1;}
+ 135:hcsr04.c      **** 
+ 136:hcsr04.c      ****         current_state = STATE_IDLE;
+ 137:hcsr04.c      ****         last_trig_time = MTIME_LO;
+ 138:hcsr04.c      ****         break;
+ 139:hcsr04.c      **** 
+ 140:hcsr04.c      ****         default:
+ 141:hcsr04.c      ****         current_state = STATE_IDLE;
+ 142:hcsr04.c      ****         break;
+ 143:hcsr04.c      **** 
+ 144:hcsr04.c      ****     }
+ 145:hcsr04.c      **** }...
+ 149              		.loc 1 145 1 is_stmt 0
+ 150 004e B250     		lw	ra,44(sp)
+ 151              		.cfi_remember_state
+ 152              		.cfi_restore 1
+ 153 0050 2254     		lw	s0,40(sp)
+ 154              		.cfi_restore 8
+ 155 0052 9254     		lw	s1,36(sp)
+ 156              		.cfi_restore 9
+ 157 0054 0259     		lw	s2,32(sp)
+ 158              		.cfi_restore 18
+ 159 0056 4561     		addi	sp,sp,48
+ 160              	.LCFI3:
+ 161              		.cfi_def_cfa_offset 0
+ 162 0058 8280     		jr	ra
+ 163              	.L12:
+ 164              	.LCFI4:
+ 165              		.cfi_restore_state
+  83:hcsr04.c      ****         gpio_bit_set(GPIOA, GPIO_PIN_0);
+ 166              		.loc 1 83 9 is_stmt 1
+ 167 005a 37150140 		li	a0,1073811456
+ 168 005e 8545     		li	a1,1
+ 169 0060 13050580 		addi	a0,a0,-2048
+ 170 0064 97000000 		call	gpio_bit_set
+ 170      E7800000 
+ 171              	.LVL3:
+  84:hcsr04.c      ****         last_trig_time = MTIME_LO;
+ 172              		.loc 1 84 9
+  84:hcsr04.c      ****         last_trig_time = MTIME_LO;
+ 173              		.loc 1 84 26 is_stmt 0
+ 174 006c B70700D1 		li	a5,-788529152
+ 175 0070 9843     		lw	a4,0(a5)
+  84:hcsr04.c      ****         last_trig_time = MTIME_LO;
+ 176              		.loc 1 84 24
+ 177 0072 B7070000 		lui	a5,%hi(.LANCHOR2)
+ 178 0076 23A0E700 		sw	a4,%lo(.LANCHOR2)(a5)
+  85:hcsr04.c      ****         current_state = STATE_TRIG_WAIT;
+ 179              		.loc 1 85 9 is_stmt 1
+  85:hcsr04.c      ****         current_state = STATE_TRIG_WAIT;
+ 180              		.loc 1 85 23 is_stmt 0
+ 181 007a 8947     		li	a5,2
+ 182 007c C1BF     		j	.L29
+ 183              	.L11:
+  89:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 270U) //10µs
+ 184              		.loc 1 89 9 is_stmt 1
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 7
+
+
+  89:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 270U) //10µs
+ 185              		.loc 1 89 21 is_stmt 0
+ 186 007e B7040000 		lui	s1,%hi(.LANCHOR2)
+  89:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 270U) //10µs
+ 187              		.loc 1 89 12
+ 188 0082 370900D1 		li	s2,-788529152
+  89:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 270U) //10µs
+ 189              		.loc 1 89 21
+ 190 0086 93840400 		addi	s1,s1,%lo(.LANCHOR2)
+ 191 008a 9840     		lw	a4,0(s1)
+  89:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 270U) //10µs
+ 192              		.loc 1 89 12
+ 193 008c 83270900 		lw	a5,0(s2)
+  89:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 270U) //10µs
+ 194              		.loc 1 89 21
+ 195 0090 998F     		sub	a5,a5,a4
+  89:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 270U) //10µs
+ 196              		.loc 1 89 11
+ 197 0092 1307D010 		li	a4,269
+ 198 0096 E37CF7FA 		bleu	a5,a4,.L4
+  91:hcsr04.c      ****             gpio_bit_reset(GPIOA, GPIO_PIN_0);
+ 199              		.loc 1 91 13 is_stmt 1
+ 200 009a 37150140 		li	a0,1073811456
+ 201 009e 8545     		li	a1,1
+ 202 00a0 13050580 		addi	a0,a0,-2048
+ 203 00a4 97000000 		call	gpio_bit_reset
+ 203      E7800000 
+ 204              	.LVL4:
+  92:hcsr04.c      ****             last_trig_time = MTIME_LO;
+ 205              		.loc 1 92 13
+  92:hcsr04.c      ****             last_trig_time = MTIME_LO;
+ 206              		.loc 1 92 30 is_stmt 0
+ 207 00ac 83270900 		lw	a5,0(s2)
+  92:hcsr04.c      ****             last_trig_time = MTIME_LO;
+ 208              		.loc 1 92 28
+ 209 00b0 9CC0     		sw	a5,0(s1)
+  93:hcsr04.c      ****             current_state = STATE_TRIG_GUARD;
+ 210              		.loc 1 93 13 is_stmt 1
+  93:hcsr04.c      ****             current_state = STATE_TRIG_GUARD;
+ 211              		.loc 1 93 27 is_stmt 0
+ 212 00b2 8D47     		li	a5,3
+ 213 00b4 61BF     		j	.L29
+ 214              	.L10:
+  98:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 8100U) /* 300µs × 27 ticks/µs */
+ 215              		.loc 1 98 9 is_stmt 1
+  98:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 8100U) /* 300µs × 27 ticks/µs */
+ 216              		.loc 1 98 12 is_stmt 0
+ 217 00b6 B70700D1 		li	a5,-788529152
+ 218 00ba 9843     		lw	a4,0(a5)
+  98:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 8100U) /* 300µs × 27 ticks/µs */
+ 219              		.loc 1 98 21
+ 220 00bc B7070000 		lui	a5,%hi(.LANCHOR2)
+ 221 00c0 83A70700 		lw	a5,%lo(.LANCHOR2)(a5)
+ 222 00c4 1D8F     		sub	a4,a4,a5
+  98:hcsr04.c      ****         if(MTIME_LO - last_trig_time >= 8100U) /* 300µs × 27 ticks/µs */
+ 223              		.loc 1 98 11
+ 224 00c6 8967     		li	a5,8192
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 8
+
+
+ 225 00c8 938737FA 		addi	a5,a5,-93
+ 226 00cc E3F1E7F8 		bleu	a4,a5,.L4
+  99:hcsr04.c      ****         { current_state = STATE_ECHO_HIGH; }
+ 227              		.loc 1 99 11 is_stmt 1
+  99:hcsr04.c      ****         { current_state = STATE_ECHO_HIGH; }
+ 228              		.loc 1 99 25 is_stmt 0
+ 229 00d0 9147     		li	a5,4
+ 230 00d2 ADBF     		j	.L29
+ 231              	.L9:
+ 103:hcsr04.c      ****         if(gpio_input_bit_get(GPIOA,GPIO_PIN_1) == SET)
+ 232              		.loc 1 103 9 is_stmt 1
+ 103:hcsr04.c      ****         if(gpio_input_bit_get(GPIOA,GPIO_PIN_1) == SET)
+ 233              		.loc 1 103 12 is_stmt 0
+ 234 00d4 37150140 		li	a0,1073811456
+ 235 00d8 8945     		li	a1,2
+ 236 00da 13050580 		addi	a0,a0,-2048
+ 237 00de 97000000 		call	gpio_input_bit_get
+ 237      E7800000 
+ 238              	.LVL5:
+ 103:hcsr04.c      ****         if(gpio_input_bit_get(GPIOA,GPIO_PIN_1) == SET)
+ 239              		.loc 1 103 11
+ 240 00e6 8547     		li	a5,1
+ 241 00e8 631BF500 		bne	a0,a5,.L17
+ 105:hcsr04.c      ****             start_time = MTIME_LO;
+ 242              		.loc 1 105 13 is_stmt 1
+ 105:hcsr04.c      ****             start_time = MTIME_LO;
+ 243              		.loc 1 105 26 is_stmt 0
+ 244 00ec B70700D1 		li	a5,-788529152
+ 245 00f0 9843     		lw	a4,0(a5)
+ 105:hcsr04.c      ****             start_time = MTIME_LO;
+ 246              		.loc 1 105 24
+ 247 00f2 B7070000 		lui	a5,%hi(.LANCHOR3)
+ 248 00f6 23A0E700 		sw	a4,%lo(.LANCHOR3)(a5)
+ 106:hcsr04.c      ****             current_state = STATE_ECHO_LOW;
+ 249              		.loc 1 106 13 is_stmt 1
+ 106:hcsr04.c      ****             current_state = STATE_ECHO_LOW;
+ 250              		.loc 1 106 27 is_stmt 0
+ 251 00fa 9547     		li	a5,5
+ 252 00fc 81BF     		j	.L29
+ 253              	.L17:
+ 109:hcsr04.c      ****         else if(MTIME_LO - last_trig_time > TIME_OUT_30MS) //1s = 2700 0000 tck, 1ms = 27000 tck
+ 254              		.loc 1 109 14 is_stmt 1
+ 109:hcsr04.c      ****         else if(MTIME_LO - last_trig_time > TIME_OUT_30MS) //1s = 2700 0000 tck, 1ms = 27000 tck
+ 255              		.loc 1 109 17 is_stmt 0
+ 256 00fe B70700D1 		li	a5,-788529152
+ 257 0102 9843     		lw	a4,0(a5)
+ 109:hcsr04.c      ****         else if(MTIME_LO - last_trig_time > TIME_OUT_30MS) //1s = 2700 0000 tck, 1ms = 27000 tck
+ 258              		.loc 1 109 26
+ 259 0104 B7070000 		lui	a5,%hi(.LANCHOR2)
+ 260 0108 83A70700 		lw	a5,%lo(.LANCHOR2)(a5)
+ 261 010c 1D8F     		sub	a4,a4,a5
+ 109:hcsr04.c      ****         else if(MTIME_LO - last_trig_time > TIME_OUT_30MS) //1s = 2700 0000 tck, 1ms = 27000 tck
+ 262              		.loc 1 109 16
+ 263 010e B7670C00 		li	a5,811008
+ 264 0112 938707C1 		addi	a5,a5,-1008
+ 265              	.L28:
+ 266 0116 E3FCE7F2 		bleu	a4,a5,.L4
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 9
+
+
+ 110:hcsr04.c      ****         {current_state = STATE_ERROR;}
+ 267              		.loc 1 110 10 is_stmt 1
+ 110:hcsr04.c      ****         {current_state = STATE_ERROR;}
+ 268              		.loc 1 110 24 is_stmt 0
+ 269 011a 9947     		li	a5,6
+ 270 011c 05BF     		j	.L29
+ 271              	.L8:
+ 114:hcsr04.c      ****         if(gpio_input_bit_get(GPIOA,GPIO_PIN_1) == RESET)
+ 272              		.loc 1 114 9 is_stmt 1
+ 114:hcsr04.c      ****         if(gpio_input_bit_get(GPIOA,GPIO_PIN_1) == RESET)
+ 273              		.loc 1 114 12 is_stmt 0
+ 274 011e 37150140 		li	a0,1073811456
+ 275 0122 8945     		li	a1,2
+ 276 0124 13050580 		addi	a0,a0,-2048
+ 277 0128 97000000 		call	gpio_input_bit_get
+ 277      E7800000 
+ 278              	.LVL6:
+ 279              	.LBB8:
+ 116:hcsr04.c      ****             end_time = MTIME_LO;
+ 280              		.loc 1 116 24
+ 281 0130 B70700D1 		li	a5,-788529152
+ 282 0134 9843     		lw	a4,0(a5)
+ 283 0136 B7060000 		lui	a3,%hi(.LANCHOR3)
+ 284 013a 93860600 		addi	a3,a3,%lo(.LANCHOR3)
+ 285              	.LBE8:
+ 114:hcsr04.c      ****         if(gpio_input_bit_get(GPIOA,GPIO_PIN_1) == RESET)
+ 286              		.loc 1 114 11
+ 287 013e 3DED     		bne	a0,zero,.L18
+ 288              	.LBB19:
+ 116:hcsr04.c      ****             end_time = MTIME_LO;
+ 289              		.loc 1 116 13 is_stmt 1
+ 118:hcsr04.c      ****             int32_t raw_distance = (int32_t)((end_time - start_time) / 157U); /* cm: 27MHz × 58µs
+ 290              		.loc 1 118 13
+ 291              	.LVL7:
+ 119:hcsr04.c      ****             distance = apply_median_filter(raw_distance); 
+ 292              		.loc 1 119 13
+ 293              	.LBB9:
+ 294              	.LBB10:
+  42:hcsr04.c      ****     filter_buffer[filter_idx] = raw_val;
+ 295              		.loc 1 42 5
+ 296              	.LBE10:
+ 297              	.LBE9:
+ 118:hcsr04.c      ****             int32_t raw_distance = (int32_t)((end_time - start_time) / 157U); /* cm: 27MHz × 58µs
+ 298              		.loc 1 118 56 is_stmt 0
+ 299 0140 9442     		lw	a3,0(a3)
+ 300              	.LBB17:
+ 301              	.LBB15:
+  42:hcsr04.c      ****     filter_buffer[filter_idx] = raw_val;
+ 302              		.loc 1 42 18
+ 303 0142 37060000 		lui	a2,%hi(.LANCHOR4)
+ 304 0146 13060600 		addi	a2,a2,%lo(.LANCHOR4)
+ 305              	.LBE15:
+ 306              	.LBE17:
+ 118:hcsr04.c      ****             int32_t raw_distance = (int32_t)((end_time - start_time) / 157U); /* cm: 27MHz × 58µs
+ 307              		.loc 1 118 56
+ 308 014a 158F     		sub	a4,a4,a3
+ 309              	.LVL8:
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 10
+
+
+ 118:hcsr04.c      ****             int32_t raw_distance = (int32_t)((end_time - start_time) / 157U); /* cm: 27MHz × 58µs
+ 310              		.loc 1 118 70
+ 311 014c 9306D009 		li	a3,157
+ 312 0150 3357D702 		divu	a4,a4,a3
+ 313              	.LVL9:
+ 314              	.LBB18:
+ 315              	.LBB16:
+  42:hcsr04.c      ****     filter_buffer[filter_idx] = raw_val;
+ 316              		.loc 1 42 18
+ 317 0154 83470600 		lbu	a5,0(a2)
+  42:hcsr04.c      ****     filter_buffer[filter_idx] = raw_val;
+ 318              		.loc 1 42 31
+ 319 0158 B7050000 		lui	a1,%hi(.LANCHOR5)
+ 320 015c 13850500 		addi	a0,a1,%lo(.LANCHOR5)
+ 321 0160 13982700 		slli	a6,a5,2
+ 322 0164 4295     		add	a0,a0,a6
+  43:hcsr04.c      ****     filter_idx = (filter_idx + 1) % WINDOW_SIZE;
+ 323              		.loc 1 43 30
+ 324 0166 8507     		addi	a5,a5,1
+  46:hcsr04.c      ****     memcpy(sorted, filter_buffer, sizeof(sorted));
+ 325              		.loc 1 46 5
+ 326 0168 93850500 		addi	a1,a1,%lo(.LANCHOR5)
+  42:hcsr04.c      ****     filter_buffer[filter_idx] = raw_val;
+ 327              		.loc 1 42 31
+ 328 016c 18C1     		sw	a4,0(a0)
+  43:hcsr04.c      ****     filter_idx = (filter_idx + 1) % WINDOW_SIZE;
+ 329              		.loc 1 43 5 is_stmt 1
+  43:hcsr04.c      ****     filter_idx = (filter_idx + 1) % WINDOW_SIZE;
+ 330              		.loc 1 43 35 is_stmt 0
+ 331 016e 1547     		li	a4,5
+ 332              	.LVL10:
+ 333 0170 B3E7E702 		rem	a5,a5,a4
+  46:hcsr04.c      ****     memcpy(sorted, filter_buffer, sizeof(sorted));
+ 334              		.loc 1 46 5
+ 335 0174 6800     		addi	a0,sp,12
+ 336              	.LVL11:
+  43:hcsr04.c      ****     filter_idx = (filter_idx + 1) % WINDOW_SIZE;
+ 337              		.loc 1 43 16
+ 338 0176 2300F600 		sb	a5,0(a2)
+  45:hcsr04.c      ****     int32_t sorted[WINDOW_SIZE];
+ 339              		.loc 1 45 5 is_stmt 1
+  46:hcsr04.c      ****     memcpy(sorted, filter_buffer, sizeof(sorted));
+ 340              		.loc 1 46 5
+ 341 017a 5146     		li	a2,20
+ 342 017c 97000000 		call	memcpy
+ 342      E7800000 
+ 343              	.LVL12:
+  48:hcsr04.c      ****     for (int i = 0; i < WINDOW_SIZE - 1; i++) 
+ 344              		.loc 1 48 5
+ 345              	.LBB11:
+  48:hcsr04.c      ****     for (int i = 0; i < WINDOW_SIZE - 1; i++) 
+ 346              		.loc 1 48 10
+ 347              	.LBE11:
+  46:hcsr04.c      ****     memcpy(sorted, filter_buffer, sizeof(sorted));
+ 348              		.loc 1 46 5 is_stmt 0
+ 349 0184 1147     		li	a4,4
+ 350              	.LVL13:
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 11
+
+
+ 351              	.L19:
+ 352 0186 7C00     		addi	a5,sp,12
+ 353              	.LBB14:
+ 354              	.LBB12:
+  50:hcsr04.c      ****         for (int j = 0; j < WINDOW_SIZE - 1 - i; j++) 
+ 355              		.loc 1 50 18
+ 356 0188 8146     		li	a3,0
+ 357 018a 09A8     		j	.L23
+ 358              	.LVL14:
+ 359              	.L21:
+  52:hcsr04.c      ****             if (sorted[j] > sorted[j+1]) 
+ 360              		.loc 1 52 13 is_stmt 1
+  52:hcsr04.c      ****             if (sorted[j] > sorted[j+1]) 
+ 361              		.loc 1 52 23 is_stmt 0
+ 362 018c 9043     		lw	a2,0(a5)
+  52:hcsr04.c      ****             if (sorted[j] > sorted[j+1]) 
+ 363              		.loc 1 52 35
+ 364 018e CC43     		lw	a1,4(a5)
+  52:hcsr04.c      ****             if (sorted[j] > sorted[j+1]) 
+ 365              		.loc 1 52 37
+ 366 0190 8506     		addi	a3,a3,1
+ 367              	.LVL15:
+  52:hcsr04.c      ****             if (sorted[j] > sorted[j+1]) 
+ 368              		.loc 1 52 16
+ 369 0192 63D4C500 		ble	a2,a1,.L20
+ 370              	.LBB13:
+  54:hcsr04.c      ****                 int32_t tmp = sorted[j];
+ 371              		.loc 1 54 17 is_stmt 1
+ 372              	.LVL16:
+  55:hcsr04.c      ****                 sorted[j] = sorted[j+1];
+ 373              		.loc 1 55 17
+  55:hcsr04.c      ****                 sorted[j] = sorted[j+1];
+ 374              		.loc 1 55 27 is_stmt 0
+ 375 0196 8CC3     		sw	a1,0(a5)
+  56:hcsr04.c      ****                 sorted[j+1] = tmp;
+ 376              		.loc 1 56 17 is_stmt 1
+  56:hcsr04.c      ****                 sorted[j+1] = tmp;
+ 377              		.loc 1 56 29 is_stmt 0
+ 378 0198 D0C3     		sw	a2,4(a5)
+ 379              	.LVL17:
+ 380              	.L20:
+ 381 019a 9107     		addi	a5,a5,4
+ 382              	.LVL18:
+ 383              	.L23:
+ 384              	.LBE13:
+  50:hcsr04.c      ****         for (int j = 0; j < WINDOW_SIZE - 1 - i; j++) 
+ 385              		.loc 1 50 9
+ 386 019c E3C8E6FE 		blt	a3,a4,.L21
+ 387              	.LVL19:
+ 388 01a0 7D17     		addi	a4,a4,-1
+ 389              	.LVL20:
+ 390              	.LBE12:
+  48:hcsr04.c      ****     for (int i = 0; i < WINDOW_SIZE - 1; i++) 
+ 391              		.loc 1 48 5
+ 392 01a2 75F3     		bne	a4,zero,.L19
+ 393              	.LBE14:
+  60:hcsr04.c      ****     return sorted[WINDOW_SIZE / 2];
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 12
+
+
+ 394              		.loc 1 60 5 is_stmt 1
+ 395              	.LVL21:
+ 396              	.LBE16:
+ 397              	.LBE18:
+ 119:hcsr04.c      ****             distance = apply_median_filter(raw_distance); 
+ 398              		.loc 1 119 22 is_stmt 0
+ 399 01a4 5247     		lw	a4,20(sp)
+ 400 01a6 B7070000 		lui	a5,%hi(.LANCHOR0)
+ 122:hcsr04.c      ****             current_state = STATE_IDLE;
+ 401              		.loc 1 122 27
+ 402 01aa 23200400 		sw	zero,0(s0)
+ 119:hcsr04.c      ****             distance = apply_median_filter(raw_distance); 
+ 403              		.loc 1 119 22
+ 404 01ae 23A0E700 		sw	a4,%lo(.LANCHOR0)(a5)
+ 121:hcsr04.c      ****             error_count = 0;
+ 405              		.loc 1 121 13 is_stmt 1
+ 121:hcsr04.c      ****             error_count = 0;
+ 406              		.loc 1 121 25 is_stmt 0
+ 407 01b2 B7070000 		lui	a5,%hi(.LANCHOR6)
+ 408 01b6 23A00700 		sw	zero,%lo(.LANCHOR6)(a5)
+ 122:hcsr04.c      ****             current_state = STATE_IDLE;
+ 409              		.loc 1 122 13 is_stmt 1
+ 410              	.LBE19:
+ 411 01ba 51BD     		j	.L4
+ 412              	.L18:
+ 125:hcsr04.c      ****         else if(MTIME_LO - start_time > TIME_OUT_40MS)
+ 413              		.loc 1 125 14
+ 125:hcsr04.c      ****         else if(MTIME_LO - start_time > TIME_OUT_40MS)
+ 414              		.loc 1 125 26 is_stmt 0
+ 415 01bc 9C42     		lw	a5,0(a3)
+ 416 01be 1D8F     		sub	a4,a4,a5
+ 125:hcsr04.c      ****         else if(MTIME_LO - start_time > TIME_OUT_40MS)
+ 417              		.loc 1 125 16
+ 418 01c0 B7871000 		li	a5,1081344
+ 419 01c4 938707AC 		addi	a5,a5,-1344
+ 420 01c8 B9B7     		j	.L28
+ 421              	.L6:
+ 130:hcsr04.c      ****         if(error_count < 250U)
+ 422              		.loc 1 130 9 is_stmt 1
+ 130:hcsr04.c      ****         if(error_count < 250U)
+ 423              		.loc 1 130 24 is_stmt 0
+ 424 01ca B7070000 		lui	a5,%hi(.LANCHOR6)
+ 425 01ce 03A70700 		lw	a4,%lo(.LANCHOR6)(a5)
+ 130:hcsr04.c      ****         if(error_count < 250U)
+ 426              		.loc 1 130 11
+ 427 01d2 9306900F 		li	a3,249
+ 428 01d6 93870700 		addi	a5,a5,%lo(.LANCHOR6)
+ 429 01da 63E4E600 		bgtu	a4,a3,.L25
+ 131:hcsr04.c      ****         {error_count++;}
+ 430              		.loc 1 131 10 is_stmt 1
+ 131:hcsr04.c      ****         {error_count++;}
+ 431              		.loc 1 131 21 is_stmt 0
+ 432 01de 0507     		addi	a4,a4,1
+ 433 01e0 98C3     		sw	a4,0(a5)
+ 434              	.L25:
+ 133:hcsr04.c      ****         if(error_count > 3U)
+ 435              		.loc 1 133 9 is_stmt 1
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 13
+
+
+ 133:hcsr04.c      ****         if(error_count > 3U)
+ 436              		.loc 1 133 11 is_stmt 0
+ 437 01e2 9843     		lw	a4,0(a5)
+ 438 01e4 8D47     		li	a5,3
+ 439 01e6 63F7E700 		bleu	a4,a5,.L26
+ 134:hcsr04.c      ****         {distance = -1;}
+ 440              		.loc 1 134 10 is_stmt 1
+ 134:hcsr04.c      ****         {distance = -1;}
+ 441              		.loc 1 134 19 is_stmt 0
+ 442 01ea B7070000 		lui	a5,%hi(.LANCHOR0)
+ 443 01ee 7D57     		li	a4,-1
+ 444 01f0 23A0E700 		sw	a4,%lo(.LANCHOR0)(a5)
+ 445              	.L26:
+ 136:hcsr04.c      ****         current_state = STATE_IDLE;
+ 446              		.loc 1 136 9 is_stmt 1
+ 137:hcsr04.c      ****         last_trig_time = MTIME_LO;
+ 447              		.loc 1 137 26 is_stmt 0
+ 448 01f4 B70700D1 		li	a5,-788529152
+ 449 01f8 9843     		lw	a4,0(a5)
+ 137:hcsr04.c      ****         last_trig_time = MTIME_LO;
+ 450              		.loc 1 137 24
+ 451 01fa B7070000 		lui	a5,%hi(.LANCHOR2)
+ 136:hcsr04.c      ****         current_state = STATE_IDLE;
+ 452              		.loc 1 136 23
+ 453 01fe 23200400 		sw	zero,0(s0)
+ 137:hcsr04.c      ****         last_trig_time = MTIME_LO;
+ 454              		.loc 1 137 9 is_stmt 1
+ 137:hcsr04.c      ****         last_trig_time = MTIME_LO;
+ 455              		.loc 1 137 24 is_stmt 0
+ 456 0202 23A0E700 		sw	a4,%lo(.LANCHOR2)(a5)
+ 138:hcsr04.c      ****         break;
+ 457              		.loc 1 138 9 is_stmt 1
+ 458 0206 A1B5     		j	.L4
+ 459              	.L5:
+ 141:hcsr04.c      ****         current_state = STATE_IDLE;
+ 460              		.loc 1 141 9
+ 141:hcsr04.c      ****         current_state = STATE_IDLE;
+ 461              		.loc 1 141 23 is_stmt 0
+ 462 0208 23200700 		sw	zero,0(a4)
+ 142:hcsr04.c      ****         break;
+ 463              		.loc 1 142 9 is_stmt 1
+ 464              		.loc 1 145 1 is_stmt 0
+ 465 020c 89B5     		j	.L4
+ 466              		.cfi_endproc
+ 467              	.LFE6:
+ 469              		.section	.bss.filter_buffer,"aw",@nobits
+ 470              		.align	2
+ 471              		.set	.LANCHOR5,. + 0
+ 474              	filter_buffer:
+ 475 0000 00000000 		.zero	20
+ 475      00000000 
+ 475      00000000 
+ 475      00000000 
+ 475      00000000 
+ 476              		.section	.sbss.current_state,"aw",@nobits
+ 477              		.align	2
+ 478              		.set	.LANCHOR1,. + 0
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 14
+
+
+ 481              	current_state:
+ 482 0000 00000000 		.zero	4
+ 483              		.section	.sbss.distance,"aw",@nobits
+ 484              		.align	2
+ 485              		.set	.LANCHOR0,. + 0
+ 488              	distance:
+ 489 0000 00000000 		.zero	4
+ 490              		.section	.sbss.error_count,"aw",@nobits
+ 491              		.align	2
+ 492              		.set	.LANCHOR6,. + 0
+ 495              	error_count:
+ 496 0000 00000000 		.zero	4
+ 497              		.section	.sbss.filter_idx,"aw",@nobits
+ 498              		.set	.LANCHOR4,. + 0
+ 501              	filter_idx:
+ 502 0000 00       		.zero	1
+ 503              		.section	.sbss.last_trig_time,"aw",@nobits
+ 504              		.align	2
+ 505              		.set	.LANCHOR2,. + 0
+ 508              	last_trig_time:
+ 509 0000 00000000 		.zero	4
+ 510              		.section	.sbss.start_time,"aw",@nobits
+ 511              		.align	2
+ 512              		.set	.LANCHOR3,. + 0
+ 515              	start_time:
+ 516 0000 00000000 		.zero	4
+ 517              		.text
+ 518              	.Letext0:
+ 519              		.file 2 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 520              		.file 3 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 521              		.file 4 "./../../firmware/GD32VF103_standard_peripheral/gd32vf103.h"
+ 522              		.file 5 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_rcu.h"
+ 523              		.file 6 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\lib\\gcc\\riscv64-unkn
+ 524              		.file 7 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 525              		.file 8 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 526              		.file 9 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
+ 527              		.file 10 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
+ 528              		.file 11 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_gpio.h"
+ 529              		.file 12 "<built-in>"
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 hcsr04.c
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:13     .text.hcsr04_init:0000000000000000 hcsr04_init
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:17     .text.hcsr04_init:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:18     .text.hcsr04_init:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:19     .text.hcsr04_init:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:20     .text.hcsr04_init:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:22     .text.hcsr04_init:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:24     .text.hcsr04_init:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:26     .text.hcsr04_init:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:28     .text.hcsr04_init:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:29     .text.hcsr04_init:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:31     .text.hcsr04_init:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:34     .text.hcsr04_init:0000000000000012 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:42     .text.hcsr04_init:0000000000000028 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:44     .text.hcsr04_init:000000000000002c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:45     .text.hcsr04_init:000000000000002e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:47     .text.hcsr04_init:0000000000000030 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:49     .text.hcsr04_init:0000000000000030 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:51     .text.hcsr04_init:0000000000000032 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:52     .text.hcsr04_init:0000000000000032 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:55     .text.hcsr04_init:0000000000000036 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:57     .text.hcsr04_init:0000000000000038 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:59     .text.hcsr04_init:0000000000000038 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:61     .text.hcsr04_init:0000000000000040 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:68     .text.hcsr04_get_distance:0000000000000000 hcsr04_get_distance
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:71     .text.hcsr04_get_distance:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:72     .text.hcsr04_get_distance:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:73     .text.hcsr04_get_distance:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:74     .text.hcsr04_get_distance:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:77     .text.hcsr04_get_distance:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:84     .text.hcsr04_tick:0000000000000000 hcsr04_tick
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:87     .text.hcsr04_tick:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:88     .text.hcsr04_tick:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:89     .text.hcsr04_tick:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:90     .text.hcsr04_tick:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:92     .text.hcsr04_tick:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:94     .text.hcsr04_tick:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:96     .text.hcsr04_tick:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:100    .text.hcsr04_tick:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:103    .text.hcsr04_tick:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:104    .text.hcsr04_tick:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:105    .text.hcsr04_tick:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:107    .text.hcsr04_tick:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:130    .text.hcsr04_tick:000000000000002e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:131    .text.hcsr04_tick:000000000000002e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:134    .text.hcsr04_tick:0000000000000034 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:138    .text.hcsr04_tick:000000000000003e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:142    .text.hcsr04_tick:000000000000004a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:143    .text.hcsr04_tick:000000000000004a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:146    .text.hcsr04_tick:000000000000004c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:149    .text.hcsr04_tick:000000000000004e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:150    .text.hcsr04_tick:000000000000004e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:151    .text.hcsr04_tick:0000000000000050 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:152    .text.hcsr04_tick:0000000000000050 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:154    .text.hcsr04_tick:0000000000000052 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:156    .text.hcsr04_tick:0000000000000054 .L0 
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 16
+
+
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:158    .text.hcsr04_tick:0000000000000056 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:161    .text.hcsr04_tick:0000000000000058 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:165    .text.hcsr04_tick:000000000000005a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:167    .text.hcsr04_tick:000000000000005a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:173    .text.hcsr04_tick:000000000000006c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:174    .text.hcsr04_tick:000000000000006c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:177    .text.hcsr04_tick:0000000000000072 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:180    .text.hcsr04_tick:000000000000007a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:181    .text.hcsr04_tick:000000000000007a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:185    .text.hcsr04_tick:000000000000007e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:186    .text.hcsr04_tick:000000000000007e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:188    .text.hcsr04_tick:0000000000000082 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:190    .text.hcsr04_tick:0000000000000086 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:193    .text.hcsr04_tick:000000000000008c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:195    .text.hcsr04_tick:0000000000000090 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:197    .text.hcsr04_tick:0000000000000092 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:200    .text.hcsr04_tick:000000000000009a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:206    .text.hcsr04_tick:00000000000000ac .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:207    .text.hcsr04_tick:00000000000000ac .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:209    .text.hcsr04_tick:00000000000000b0 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:211    .text.hcsr04_tick:00000000000000b2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:212    .text.hcsr04_tick:00000000000000b2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:216    .text.hcsr04_tick:00000000000000b6 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:217    .text.hcsr04_tick:00000000000000b6 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:220    .text.hcsr04_tick:00000000000000bc .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:224    .text.hcsr04_tick:00000000000000c6 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:228    .text.hcsr04_tick:00000000000000d0 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:229    .text.hcsr04_tick:00000000000000d0 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:233    .text.hcsr04_tick:00000000000000d4 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:234    .text.hcsr04_tick:00000000000000d4 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:240    .text.hcsr04_tick:00000000000000e6 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:243    .text.hcsr04_tick:00000000000000ec .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:244    .text.hcsr04_tick:00000000000000ec .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:247    .text.hcsr04_tick:00000000000000f2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:250    .text.hcsr04_tick:00000000000000fa .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:251    .text.hcsr04_tick:00000000000000fa .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:255    .text.hcsr04_tick:00000000000000fe .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:256    .text.hcsr04_tick:00000000000000fe .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:259    .text.hcsr04_tick:0000000000000104 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:263    .text.hcsr04_tick:000000000000010e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:268    .text.hcsr04_tick:000000000000011a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:269    .text.hcsr04_tick:000000000000011a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:273    .text.hcsr04_tick:000000000000011e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:274    .text.hcsr04_tick:000000000000011e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:281    .text.hcsr04_tick:0000000000000130 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:287    .text.hcsr04_tick:000000000000013e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:290    .text.hcsr04_tick:0000000000000140 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:292    .text.hcsr04_tick:0000000000000140 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:295    .text.hcsr04_tick:0000000000000140 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:298    .text.hcsr04_tick:0000000000000140 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:299    .text.hcsr04_tick:0000000000000140 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:303    .text.hcsr04_tick:0000000000000142 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:308    .text.hcsr04_tick:000000000000014a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:311    .text.hcsr04_tick:000000000000014c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:317    .text.hcsr04_tick:0000000000000154 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:319    .text.hcsr04_tick:0000000000000158 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:324    .text.hcsr04_tick:0000000000000166 .L0 
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 17
+
+
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:326    .text.hcsr04_tick:0000000000000168 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:328    .text.hcsr04_tick:000000000000016c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:330    .text.hcsr04_tick:000000000000016e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:331    .text.hcsr04_tick:000000000000016e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:335    .text.hcsr04_tick:0000000000000174 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:338    .text.hcsr04_tick:0000000000000176 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:340    .text.hcsr04_tick:000000000000017a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:341    .text.hcsr04_tick:000000000000017a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:346    .text.hcsr04_tick:0000000000000184 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:348    .text.hcsr04_tick:0000000000000184 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:349    .text.hcsr04_tick:0000000000000184 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:356    .text.hcsr04_tick:0000000000000188 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:361    .text.hcsr04_tick:000000000000018c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:362    .text.hcsr04_tick:000000000000018c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:364    .text.hcsr04_tick:000000000000018e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:366    .text.hcsr04_tick:0000000000000190 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:369    .text.hcsr04_tick:0000000000000192 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:373    .text.hcsr04_tick:0000000000000196 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:374    .text.hcsr04_tick:0000000000000196 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:375    .text.hcsr04_tick:0000000000000196 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:377    .text.hcsr04_tick:0000000000000198 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:378    .text.hcsr04_tick:0000000000000198 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:386    .text.hcsr04_tick:000000000000019c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:392    .text.hcsr04_tick:00000000000001a2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:398    .text.hcsr04_tick:00000000000001a4 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:399    .text.hcsr04_tick:00000000000001a4 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:402    .text.hcsr04_tick:00000000000001aa .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:404    .text.hcsr04_tick:00000000000001ae .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:406    .text.hcsr04_tick:00000000000001b2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:407    .text.hcsr04_tick:00000000000001b2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:411    .text.hcsr04_tick:00000000000001ba .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:414    .text.hcsr04_tick:00000000000001bc .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:415    .text.hcsr04_tick:00000000000001bc .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:418    .text.hcsr04_tick:00000000000001c0 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:423    .text.hcsr04_tick:00000000000001ca .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:424    .text.hcsr04_tick:00000000000001ca .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:427    .text.hcsr04_tick:00000000000001d2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:431    .text.hcsr04_tick:00000000000001de .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:432    .text.hcsr04_tick:00000000000001de .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:436    .text.hcsr04_tick:00000000000001e2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:437    .text.hcsr04_tick:00000000000001e2 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:441    .text.hcsr04_tick:00000000000001ea .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:442    .text.hcsr04_tick:00000000000001ea .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:447    .text.hcsr04_tick:00000000000001f4 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:448    .text.hcsr04_tick:00000000000001f4 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:451    .text.hcsr04_tick:00000000000001fa .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:453    .text.hcsr04_tick:00000000000001fe .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:455    .text.hcsr04_tick:0000000000000202 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:456    .text.hcsr04_tick:0000000000000202 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:458    .text.hcsr04_tick:0000000000000206 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:461    .text.hcsr04_tick:0000000000000208 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:462    .text.hcsr04_tick:0000000000000208 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:464    .text.hcsr04_tick:000000000000020c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:465    .text.hcsr04_tick:000000000000020c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:466    .text.hcsr04_tick:000000000000020e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:471    .bss.filter_buffer:0000000000000000 .LANCHOR5
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:474    .bss.filter_buffer:0000000000000000 filter_buffer
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 18
+
+
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:478    .sbss.current_state:0000000000000000 .LANCHOR1
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:481    .sbss.current_state:0000000000000000 current_state
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:485    .sbss.distance:0000000000000000 .LANCHOR0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:488    .sbss.distance:0000000000000000 distance
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:492    .sbss.error_count:0000000000000000 .LANCHOR6
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:495    .sbss.error_count:0000000000000000 error_count
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:498    .sbss.filter_idx:0000000000000000 .LANCHOR4
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:501    .sbss.filter_idx:0000000000000000 filter_idx
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:505    .sbss.last_trig_time:0000000000000000 .LANCHOR2
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:508    .sbss.last_trig_time:0000000000000000 last_trig_time
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:512    .sbss.start_time:0000000000000000 .LANCHOR3
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:515    .sbss.start_time:0000000000000000 start_time
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:64     .text.hcsr04_init:0000000000000040 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:80     .text.hcsr04_get_distance:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:469    .text.hcsr04_tick:000000000000020e .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:119    .rodata.hcsr04_tick:0000000000000000 .L7
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:459    .text.hcsr04_tick:0000000000000208 .L5
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:148    .text.hcsr04_tick:000000000000004e .L4
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:144    .text.hcsr04_tick:000000000000004c .L29
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:253    .text.hcsr04_tick:00000000000000fe .L17
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:412    .text.hcsr04_tick:00000000000001bc .L18
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:383    .text.hcsr04_tick:000000000000019c .L23
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:380    .text.hcsr04_tick:000000000000019a .L20
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:359    .text.hcsr04_tick:000000000000018c .L21
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:351    .text.hcsr04_tick:0000000000000186 .L19
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:265    .text.hcsr04_tick:0000000000000116 .L28
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:434    .text.hcsr04_tick:00000000000001e2 .L25
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:445    .text.hcsr04_tick:00000000000001f4 .L26
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:128    .text.hcsr04_tick:000000000000002e .L13
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:163    .text.hcsr04_tick:000000000000005a .L12
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:183    .text.hcsr04_tick:000000000000007e .L11
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:214    .text.hcsr04_tick:00000000000000b6 .L10
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:231    .text.hcsr04_tick:00000000000000d4 .L9
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:271    .text.hcsr04_tick:000000000000011e .L8
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:421    .text.hcsr04_tick:00000000000001ca .L6
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:2545   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3879   .debug_str:00000000000006ef .LASF190
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3587   .debug_str:0000000000000106 .LASF191
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3791   .debug_str:0000000000000503 .LASF192
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3509   .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3539   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3859   .debug_str:0000000000000687 .LASF0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3605   .debug_str:0000000000000161 .LASF1
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3563   .debug_str:0000000000000074 .LASF5
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3785   .debug_str:00000000000004e3 .LASF2
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3753   .debug_str:000000000000042f .LASF3
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3885   .debug_str:000000000000078b .LASF4
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3721   .debug_str:000000000000037f .LASF6
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3623   .debug_str:00000000000001af .LASF7
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3651   .debug_str:000000000000023d .LASF8
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3681   .debug_str:00000000000002c8 .LASF9
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3635   .debug_str:00000000000001e2 .LASF10
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3575   .debug_str:00000000000000bd .LASF11
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3869   .debug_str:00000000000006b6 .LASF12
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3783   .debug_str:00000000000004db .LASF13
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3897   .debug_str:00000000000007d3 .LASF14
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 19
+
+
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3673   .debug_str:000000000000029c .LASF162
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3725   .debug_str:0000000000000390 .LASF15
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3549   .debug_str:0000000000000027 .LASF16
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3607   .debug_str:000000000000016d .LASF17
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3601   .debug_str:0000000000000152 .LASF18
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3863   .debug_str:000000000000069d .LASF19
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3633   .debug_str:00000000000001d8 .LASF20
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3771   .debug_str:0000000000000499 .LASF21
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3773   .debug_str:00000000000004a4 .LASF22
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3775   .debug_str:00000000000004af .LASF23
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3777   .debug_str:00000000000004ba .LASF24
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3779   .debug_str:00000000000004c5 .LASF25
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3781   .debug_str:00000000000004d0 .LASF26
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3877   .debug_str:00000000000006e5 .LASF27
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3545   .debug_str:0000000000000015 .LASF28
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3547   .debug_str:000000000000001e .LASF29
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3747   .debug_str:0000000000000411 .LASF30
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3749   .debug_str:000000000000041c .LASF31
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3577   .debug_str:00000000000000d4 .LASF32
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3579   .debug_str:00000000000000de .LASF33
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3915   .debug_str:0000000000000829 .LASF34
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3839   .debug_str:0000000000000629 .LASF35
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3645   .debug_str:000000000000021e .LASF36
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3599   .debug_str:0000000000000149 .LASF37
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3735   .debug_str:00000000000003c9 .LASF38
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3893   .debug_str:00000000000007b8 .LASF39
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3701   .debug_str:0000000000000327 .LASF40
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3691   .debug_str:00000000000002f7 .LASF41
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3559   .debug_str:000000000000005f .LASF42
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3583   .debug_str:00000000000000f1 .LASF43
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3675   .debug_str:00000000000002ac .LASF44
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3677   .debug_str:00000000000002b6 .LASF45
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3589   .debug_str:000000000000010f .LASF46
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3591   .debug_str:0000000000000119 .LASF47
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3687   .debug_str:00000000000002e5 .LASF48
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3689   .debug_str:00000000000002ee .LASF49
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3769   .debug_str:000000000000048e .LASF50
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3543   .debug_str:000000000000000c .LASF51
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3745   .debug_str:0000000000000406 .LASF52
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3847   .debug_str:0000000000000653 .LASF53
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3759   .debug_str:0000000000000453 .LASF54
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3567   .debug_str:0000000000000087 .LASF55
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3843   .debug_str:000000000000063c .LASF56
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3907   .debug_str:00000000000007fb .LASF57
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3709   .debug_str:0000000000000350 .LASF58
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3671   .debug_str:0000000000000295 .LASF59
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3833   .debug_str:0000000000000613 .LASF60
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3835   .debug_str:000000000000061b .LASF61
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3767   .debug_str:0000000000000483 .LASF62
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3889   .debug_str:00000000000007a3 .LASF63
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3731   .debug_str:00000000000003ac .LASF64
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3795   .debug_str:0000000000000551 .LASF65
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3661   .debug_str:000000000000026e .LASF70
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3873   .debug_str:00000000000006d2 .LASF66
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3823   .debug_str:00000000000005ef .LASF67
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3655   .debug_str:0000000000000254 .LASF68
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3903   .debug_str:00000000000007f0 .LASF69
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 20
+
+
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3669   .debug_str:0000000000000290 .LASF71
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3597   .debug_str:0000000000000140 .LASF72
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3927   .debug_str:0000000000000863 .LASF73
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3613   .debug_str:0000000000000182 .LASF74
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3937   .debug_str:0000000000000890 .LASF75
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3739   .debug_str:00000000000003de .LASF76
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3849   .debug_str:000000000000065f .LASF77
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3841   .debug_str:0000000000000632 .LASF78
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3797   .debug_str:000000000000055a .LASF79
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3923   .debug_str:0000000000000849 .LASF80
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3617   .debug_str:0000000000000191 .LASF81
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3551   .debug_str:0000000000000030 .LASF82
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3541   .debug_str:0000000000000000 .LASF83
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3881   .debug_str:0000000000000777 .LASF84
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3627   .debug_str:00000000000001bf .LASF85
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3751   .debug_str:0000000000000427 .LASF86
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3685   .debug_str:00000000000002e0 .LASF87
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3649   .debug_str:0000000000000238 .LASF88
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3799   .debug_str:0000000000000564 .LASF89
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3611   .debug_str:000000000000017c .LASF90
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3857   .debug_str:0000000000000681 .LASF91
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3807   .debug_str:000000000000058d .LASF92
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3625   .debug_str:00000000000001b8 .LASF93
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3683   .debug_str:00000000000002da .LASF94
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3581   .debug_str:00000000000000e8 .LASF95
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3619   .debug_str:000000000000019f .LASF96
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3667   .debug_str:000000000000028a .LASF97
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3723   .debug_str:0000000000000389 .LASF98
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3837   .debug_str:0000000000000623 .LASF99
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3603   .debug_str:000000000000015a .LASF100
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3609   .debug_str:0000000000000176 .LASF101
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3917   .debug_str:0000000000000832 .LASF102
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3665   .debug_str:0000000000000281 .LASF103
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3639   .debug_str:00000000000001f8 .LASF104
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3693   .debug_str:00000000000002ff .LASF105
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3717   .debug_str:0000000000000373 .LASF106
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3809   .debug_str:0000000000000595 .LASF107
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3801   .debug_str:000000000000056b .LASF108
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3825   .debug_str:00000000000005f7 .LASF109
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3851   .debug_str:0000000000000669 .LASF110
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3629   .debug_str:00000000000001c7 .LASF111
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3867   .debug_str:00000000000006ae .LASF112
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3659   .debug_str:0000000000000266 .LASF113
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3813   .debug_str:00000000000005ab .LASF114
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3557   .debug_str:0000000000000054 .LASF115
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3821   .debug_str:00000000000005d6 .LASF116
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3817   .debug_str:00000000000005c4 .LASF117
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3755   .debug_str:0000000000000439 .LASF118
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3819   .debug_str:00000000000005cc .LASF119
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3707   .debug_str:0000000000000348 .LASF120
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3631   .debug_str:00000000000001ce .LASF121
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3933   .debug_str:000000000000087f .LASF122
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3763   .debug_str:0000000000000468 .LASF123
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3679   .debug_str:00000000000002c0 .LASF124
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3637   .debug_str:00000000000001f0 .LASF125
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3713   .debug_str:000000000000035d .LASF126
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3565   .debug_str:000000000000007e .LASF127
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 21
+
+
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3911   .debug_str:000000000000080e .LASF128
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3621   .debug_str:00000000000001a7 .LASF129
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3615   .debug_str:000000000000018c .LASF130
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3853   .debug_str:0000000000000670 .LASF131
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3803   .debug_str:0000000000000573 .LASF132
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3905   .debug_str:00000000000007f5 .LASF133
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3695   .debug_str:0000000000000305 .LASF134
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3789   .debug_str:00000000000004fd .LASF135
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3827   .debug_str:00000000000005fe .LASF136
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3829   .debug_str:0000000000000606 .LASF137
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3719   .debug_str:0000000000000379 .LASF138
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3887   .debug_str:000000000000079e .LASF139
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3899   .debug_str:00000000000007dc .LASF140
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3875   .debug_str:00000000000006d8 .LASF141
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3705   .debug_str:000000000000033b .LASF142
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3925   .debug_str:0000000000000854 .LASF143
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3757   .debug_str:0000000000000444 .LASF144
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3699   .debug_str:000000000000031c .LASF145
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3929   .debug_str:000000000000086c .LASF146
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3811   .debug_str:000000000000059e .LASF147
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3931   .debug_str:0000000000000871 .LASF148
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3595   .debug_str:0000000000000132 .LASF149
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3909   .debug_str:0000000000000804 .LASF150
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3855   .debug_str:0000000000000675 .LASF151
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3891   .debug_str:00000000000007ab .LASF152
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3643   .debug_str:0000000000000210 .LASF153
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3593   .debug_str:0000000000000123 .LASF154
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3647   .debug_str:0000000000000227 .LASF155
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3569   .debug_str:000000000000008e .LASF156
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3573   .debug_str:00000000000000ac .LASF157
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3793   .debug_str:0000000000000548 .LASF158
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3743   .debug_str:00000000000003ff .LASF159
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3727   .debug_str:0000000000000396 .LASF160
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3919   .debug_str:0000000000000838 .LASF161
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3585   .debug_str:00000000000000fb .LASF193
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3657   .debug_str:000000000000025a .LASF163
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3895   .debug_str:00000000000007c0 .LASF164
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3901   .debug_str:00000000000007e9 .LASF194
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3663   .debug_str:0000000000000276 .LASF165
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3765   .debug_str:0000000000000472 .LASF166
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3697   .debug_str:000000000000030c .LASF167
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3913   .debug_str:0000000000000818 .LASF168
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3641   .debug_str:0000000000000200 .LASF169
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3571   .debug_str:000000000000009d .LASF170
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3653   .debug_str:0000000000000248 .LASF171
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3787   .debug_str:00000000000004f1 .LASF172
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3761   .debug_str:000000000000045a .LASF173
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3883   .debug_str:0000000000000780 .LASF174
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3921   .debug_str:0000000000000840 .LASF183
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3861   .debug_str:0000000000000694 .LASF175
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3935   .debug_str:0000000000000884 .LASF176
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3845   .debug_str:0000000000000644 .LASF177
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3561   .debug_str:0000000000000066 .LASF178
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3733   .debug_str:00000000000003be .LASF179
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3703   .debug_str:000000000000032f .LASF181
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:85     .text.hcsr04_tick:0000000000000000 .LFB6
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:467    .text.hcsr04_tick:000000000000020e .LFE6
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 22
+
+
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3356   .debug_loc:0000000000000000 .LLST1
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3729   .debug_str:000000000000039f .LASF180
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3379   .debug_loc:0000000000000038 .LLST2
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:293    .text.hcsr04_tick:0000000000000140 .LBB9
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3418   .debug_loc:0000000000000083 .LLST4
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:354    .text.hcsr04_tick:0000000000000188 .LBB12
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:390    .text.hcsr04_tick:00000000000001a2 .LBE12
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3450   .debug_loc:00000000000000c4 .LLST5
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:370    .text.hcsr04_tick:0000000000000196 .LBB13
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:384    .text.hcsr04_tick:000000000000019c .LBE13
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3467   .debug_loc:00000000000000ef .LLST6
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:343    .text.hcsr04_tick:0000000000000184 .LVL12
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:171    .text.hcsr04_tick:000000000000006c .LVL3
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:204    .text.hcsr04_tick:00000000000000ac .LVL4
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:238    .text.hcsr04_tick:00000000000000e6 .LVL5
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:278    .text.hcsr04_tick:0000000000000130 .LVL6
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3871   .debug_str:00000000000006be .LASF195
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:69     .text.hcsr04_get_distance:0000000000000000 .LFB5
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:78     .text.hcsr04_get_distance:000000000000000a .LFE5
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3737   .debug_str:00000000000003d2 .LASF182
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:14     .text.hcsr04_init:0000000000000000 .LFB4
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:62     .text.hcsr04_init:0000000000000040 .LFE4
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3474   .debug_loc:0000000000000102 .LLST0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:32     .text.hcsr04_init:0000000000000012 .LVL0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:40     .text.hcsr04_init:0000000000000028 .LVL1
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:60     .text.hcsr04_init:0000000000000040 .LVL2
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3815   .debug_str:00000000000005b0 .LASF196
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3865   .debug_str:00000000000006a6 .LASF197
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3831   .debug_str:000000000000060c .LASF184
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3711   .debug_str:0000000000000356 .LASF198
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3715   .debug_str:0000000000000362 .LASF199
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3555   .debug_str:0000000000000047 .LASF185
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3553   .debug_str:0000000000000038 .LASF186
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3805   .debug_str:000000000000057a .LASF187
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3741   .debug_str:00000000000003e7 .LASF188
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:3939   .debug_str:000000000000089a .LASF189
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:91     .text.hcsr04_tick:0000000000000002 .LCFI2
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:160    .text.hcsr04_tick:0000000000000058 .LCFI3
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:164    .text.hcsr04_tick:000000000000005a .LCFI4
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:291    .text.hcsr04_tick:0000000000000140 .LVL7
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:309    .text.hcsr04_tick:000000000000014c .LVL8
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:313    .text.hcsr04_tick:0000000000000154 .LVL9
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:332    .text.hcsr04_tick:0000000000000170 .LVL10
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:336    .text.hcsr04_tick:0000000000000176 .LVL11
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:350    .text.hcsr04_tick:0000000000000186 .LVL13
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:387    .text.hcsr04_tick:00000000000001a0 .LVL19
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:389    .text.hcsr04_tick:00000000000001a2 .LVL20
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:395    .text.hcsr04_tick:00000000000001a4 .LVL21
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:358    .text.hcsr04_tick:000000000000018c .LVL14
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:367    .text.hcsr04_tick:0000000000000192 .LVL15
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:382    .text.hcsr04_tick:000000000000019c .LVL18
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:372    .text.hcsr04_tick:0000000000000196 .LVL16
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:379    .text.hcsr04_tick:000000000000019a .LVL17
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:21     .text.hcsr04_init:0000000000000002 .LCFI0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:56     .text.hcsr04_init:0000000000000038 .LCFI1
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:531    .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:279    .text.hcsr04_tick:0000000000000130 .LBB8
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s 			page 23
+
+
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:285    .text.hcsr04_tick:000000000000013e .LBE8
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:288    .text.hcsr04_tick:0000000000000140 .LBB19
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:410    .text.hcsr04_tick:00000000000001ba .LBE19
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:297    .text.hcsr04_tick:0000000000000140 .LBE9
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:300    .text.hcsr04_tick:0000000000000142 .LBB17
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:306    .text.hcsr04_tick:000000000000014a .LBE17
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:314    .text.hcsr04_tick:0000000000000154 .LBB18
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:397    .text.hcsr04_tick:00000000000001a4 .LBE18
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:345    .text.hcsr04_tick:0000000000000184 .LBB11
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:347    .text.hcsr04_tick:0000000000000184 .LBE11
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:353    .text.hcsr04_tick:0000000000000188 .LBB14
+C:\Users\zanil\AppData\Local\Temp\ccfrNSQR.s:393    .text.hcsr04_tick:00000000000001a4 .LBE14
+
+UNDEFINED SYMBOLS
+rcu_periph_clock_enable
+gpio_init
+gpio_bit_set
+gpio_bit_reset
+gpio_input_bit_get
+memcpy

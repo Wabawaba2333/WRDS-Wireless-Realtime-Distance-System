@@ -1,4 +1,4 @@
-build/main.o: main.c \
+build/hcsr04.o: hcsr04.c hcsr04.h \
  ../../firmware/GD32VF103_standard_peripheral/gd32vf103.h \
  ../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h \
  ../../firmware/GD32VF103_standard_peripheral/gd32vf103_libopt.h \
@@ -26,8 +26,9 @@ build/main.o: main.c \
  ../../firmware/RISCV/drivers/n200_func.h \
  ../../firmware/RISCV/drivers/n200_timer.h \
  ../../firmware/RISCV/drivers/n200_eclic.h \
- ../../firmware/RISCV/drivers/riscv_const.h drivers.h lcd.h hcsr04.h \
- display.h
+ ../../firmware/RISCV/drivers/riscv_const.h
+
+hcsr04.h:
 
 ../../firmware/GD32VF103_standard_peripheral/gd32vf103.h:
 
@@ -84,11 +85,3 @@ build/main.o: main.c \
 ../../firmware/RISCV/drivers/n200_eclic.h:
 
 ../../firmware/RISCV/drivers/riscv_const.h:
-
-drivers.h:
-
-lcd.h:
-
-hcsr04.h:
-
-display.h:

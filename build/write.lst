@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 1
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s 			page 1
 
 
    1              		.file	"write.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 1
   41:./../../firmware/RISCV/stubs/write.c **** }
   42:./../../firmware/RISCV/stubs/write.c ****  
   43:./../../firmware/RISCV/stubs/write.c **** #elif defined ( __GNUC__ )
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 2
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s 			page 2
 
 
   44:./../../firmware/RISCV/stubs/write.c **** /*
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 1
   40              		.cfi_offset 1, -4
   70:./../../firmware/RISCV/stubs/write.c ****     while (usart_flag_get(USART0, USART_FLAG_TBE)== RESET){
   41              		.loc 1 70 12
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 3
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s 			page 3
 
 
   42 0016 13040480 		addi	s0,s0,-2048
@@ -173,217 +173,217 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 1
   83              		.file 10 "./../../firmware/GD32VF103_standard_peripheral/gd32vf103.h"
   84              		.file 11 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_usart.h"
   85              		.file 12 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 4
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 write.c
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:13     .text._put_char:0000000000000000 _put_char
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:17     .text._put_char:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:19     .text._put_char:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:20     .text._put_char:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:21     .text._put_char:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:23     .text._put_char:0000000000000002 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:25     .text._put_char:0000000000000004 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:27     .text._put_char:0000000000000004 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:29     .text._put_char:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:31     .text._put_char:000000000000000a .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:32     .text._put_char:000000000000000e .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:34     .text._put_char:000000000000000e .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:36     .text._put_char:0000000000000010 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:39     .text._put_char:0000000000000014 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:40     .text._put_char:0000000000000016 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:42     .text._put_char:0000000000000016 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:44     .text._put_char:000000000000001a .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:48     .text._put_char:0000000000000022 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:49     .text._put_char:0000000000000022 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:50     .text._put_char:0000000000000022 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:55     .text._put_char:000000000000002e .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:57     .text._put_char:0000000000000030 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:58     .text._put_char:0000000000000030 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:59     .text._put_char:0000000000000032 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:61     .text._put_char:0000000000000034 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:64     .text._put_char:0000000000000038 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:68     .text._put_char:000000000000003a .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:70     .text._put_char:000000000000003c .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:73     .text._put_char:000000000000003c .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:13     .text._put_char:0000000000000000 _put_char
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:17     .text._put_char:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:19     .text._put_char:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:20     .text._put_char:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:21     .text._put_char:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:23     .text._put_char:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:25     .text._put_char:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:27     .text._put_char:0000000000000004 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:29     .text._put_char:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:31     .text._put_char:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:32     .text._put_char:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:34     .text._put_char:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:36     .text._put_char:0000000000000010 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:39     .text._put_char:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:40     .text._put_char:0000000000000016 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:42     .text._put_char:0000000000000016 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:44     .text._put_char:000000000000001a .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:48     .text._put_char:0000000000000022 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:49     .text._put_char:0000000000000022 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:50     .text._put_char:0000000000000022 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:55     .text._put_char:000000000000002e .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:57     .text._put_char:0000000000000030 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:58     .text._put_char:0000000000000030 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:59     .text._put_char:0000000000000032 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:61     .text._put_char:0000000000000034 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:64     .text._put_char:0000000000000038 .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:68     .text._put_char:000000000000003a .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:70     .text._put_char:000000000000003c .L0 
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:73     .text._put_char:000000000000003c .L0 
                      .debug_frame:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:47     .text._put_char:0000000000000022 .L2
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:1709   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2557   .debug_str:000000000000052d .LASF146
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2357   .debug_str:0000000000000121 .LASF147
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2437   .debug_str:00000000000002b5 .LASF148
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2299   .debug_ranges:0000000000000000 .Ldebug_ranges0
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2305   .debug_line:0000000000000000 .Ldebug_line0
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2345   .debug_str:00000000000000db .LASF0
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2317   .debug_str:0000000000000037 .LASF5
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2477   .debug_str:00000000000003b0 .LASF1
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2547   .debug_str:0000000000000501 .LASF2
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2561   .debug_str:00000000000005be .LASF3
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2363   .debug_str:0000000000000156 .LASF4
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2387   .debug_str:00000000000001ce .LASF6
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2409   .debug_str:000000000000022d .LASF7
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2373   .debug_str:000000000000017f .LASF8
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2349   .debug_str:00000000000000ed .LASF9
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2545   .debug_str:00000000000004f4 .LASF10
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2549   .debug_str:000000000000050b .LASF11
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2571   .debug_str:00000000000005fe .LASF12
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2533   .debug_str:00000000000004bf .LASF13
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2465   .debug_str:0000000000000371 .LASF14
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2341   .debug_str:00000000000000cd .LASF15
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2531   .debug_str:00000000000004b7 .LASF16
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2581   .debug_str:000000000000062e .LASF17
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 5
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:47     .text._put_char:0000000000000022 .L2
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:1709   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2557   .debug_str:0000000000000530 .LASF146
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2357   .debug_str:0000000000000121 .LASF147
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2479   .debug_str:0000000000000382 .LASF148
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2299   .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2305   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2345   .debug_str:00000000000000db .LASF0
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2317   .debug_str:0000000000000037 .LASF5
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2475   .debug_str:000000000000036e .LASF1
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2547   .debug_str:0000000000000504 .LASF2
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2561   .debug_str:00000000000005c1 .LASF3
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2363   .debug_str:0000000000000156 .LASF4
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2387   .debug_str:00000000000001ce .LASF6
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2409   .debug_str:000000000000022d .LASF7
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2373   .debug_str:000000000000017f .LASF8
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2349   .debug_str:00000000000000ed .LASF9
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2545   .debug_str:00000000000004f7 .LASF10
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2549   .debug_str:000000000000050e .LASF11
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2571   .debug_str:0000000000000601 .LASF12
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2533   .debug_str:00000000000004c2 .LASF13
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2463   .debug_str:000000000000032f .LASF14
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2341   .debug_str:00000000000000cd .LASF15
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2531   .debug_str:00000000000004ba .LASF16
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2581   .debug_str:0000000000000631 .LASF17
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s 			page 5
 
 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2427   .debug_str:000000000000028d .LASF18
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2401   .debug_str:0000000000000206 .LASF19
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2523   .debug_str:0000000000000497 .LASF20
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2525   .debug_str:000000000000049f .LASF21
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2495   .debug_str:0000000000000406 .LASF22
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2565   .debug_str:00000000000005d6 .LASF23
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2469   .debug_str:0000000000000382 .LASF24
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2483   .debug_str:00000000000003cd .LASF25
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2395   .debug_str:00000000000001f3 .LASF30
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2553   .debug_str:000000000000051a .LASF26
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2517   .debug_str:0000000000000482 .LASF27
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2389   .debug_str:00000000000001d9 .LASF28
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2577   .debug_str:0000000000000623 .LASF29
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2399   .debug_str:0000000000000201 .LASF31
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2339   .debug_str:00000000000000c4 .LASF32
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2595   .debug_str:0000000000000673 .LASF33
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2351   .debug_str:0000000000000104 .LASF34
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2607   .debug_str:00000000000006ab .LASF35
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2457   .debug_str:0000000000000346 .LASF36
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2445   .debug_str:000000000000030d .LASF37
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2529   .debug_str:00000000000004ad .LASF38
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2485   .debug_str:00000000000003d6 .LASF39
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2591   .debug_str:0000000000000659 .LASF40
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2355   .debug_str:0000000000000113 .LASF41
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2311   .debug_str:000000000000001c .LASF42
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2307   .debug_str:0000000000000000 .LASF43
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2559   .debug_str:00000000000005b5 .LASF44
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2367   .debug_str:0000000000000166 .LASF45
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2459   .debug_str:000000000000034f .LASF46
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2509   .debug_str:0000000000000452 .LASF47
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2385   .debug_str:00000000000001c9 .LASF48
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2487   .debug_str:00000000000003e0 .LASF49
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2473   .debug_str:000000000000039a .LASF50
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2543   .debug_str:00000000000004ee .LASF51
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2497   .debug_str:0000000000000411 .LASF52
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2365   .debug_str:000000000000015f .LASF53
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2411   .debug_str:000000000000023f .LASF54
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2329   .debug_str:0000000000000084 .LASF55
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2359   .debug_str:0000000000000146 .LASF56
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2397   .debug_str:00000000000001fb .LASF57
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2443   .debug_str:0000000000000306 .LASF58
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2527   .debug_str:00000000000004a7 .LASF59
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2343   .debug_str:00000000000000d4 .LASF60
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2347   .debug_str:00000000000000e7 .LASF61
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2587   .debug_str:000000000000064b .LASF62
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2539   .debug_str:00000000000004d7 .LASF63
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2379   .debug_str:00000000000001a2 .LASF64
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2413   .debug_str:0000000000000245 .LASF65
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2435   .debug_str:00000000000002af .LASF66
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2501   .debug_str:0000000000000423 .LASF67
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2489   .debug_str:00000000000003e7 .LASF68
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2519   .debug_str:000000000000048a .LASF69
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2535   .debug_str:00000000000004cb .LASF70
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2369   .debug_str:000000000000016e .LASF71
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2405   .debug_str:000000000000021d .LASF72
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2393   .debug_str:00000000000001eb .LASF73
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2507   .debug_str:000000000000044d .LASF74
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 6
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2427   .debug_str:000000000000028d .LASF18
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2401   .debug_str:0000000000000206 .LASF19
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2523   .debug_str:000000000000049a .LASF20
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2525   .debug_str:00000000000004a2 .LASF21
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2495   .debug_str:0000000000000409 .LASF22
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2565   .debug_str:00000000000005d9 .LASF23
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2467   .debug_str:0000000000000340 .LASF24
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2483   .debug_str:00000000000003d0 .LASF25
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2395   .debug_str:00000000000001f3 .LASF30
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2553   .debug_str:000000000000051d .LASF26
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2517   .debug_str:0000000000000485 .LASF27
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2389   .debug_str:00000000000001d9 .LASF28
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2577   .debug_str:0000000000000626 .LASF29
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2399   .debug_str:0000000000000201 .LASF31
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2339   .debug_str:00000000000000c4 .LASF32
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2595   .debug_str:0000000000000676 .LASF33
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2351   .debug_str:0000000000000104 .LASF34
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2607   .debug_str:00000000000006ae .LASF35
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2455   .debug_str:0000000000000304 .LASF36
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2443   .debug_str:00000000000002cb .LASF37
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2529   .debug_str:00000000000004b0 .LASF38
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2485   .debug_str:00000000000003d9 .LASF39
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2591   .debug_str:000000000000065c .LASF40
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2355   .debug_str:0000000000000113 .LASF41
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2311   .debug_str:000000000000001c .LASF42
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2307   .debug_str:0000000000000000 .LASF43
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2559   .debug_str:00000000000005b8 .LASF44
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2367   .debug_str:0000000000000166 .LASF45
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2457   .debug_str:000000000000030d .LASF46
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2509   .debug_str:0000000000000455 .LASF47
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2385   .debug_str:00000000000001c9 .LASF48
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2487   .debug_str:00000000000003e3 .LASF49
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2471   .debug_str:0000000000000358 .LASF50
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2543   .debug_str:00000000000004f1 .LASF51
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2497   .debug_str:0000000000000414 .LASF52
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2365   .debug_str:000000000000015f .LASF53
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2411   .debug_str:000000000000023f .LASF54
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2329   .debug_str:0000000000000084 .LASF55
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2359   .debug_str:0000000000000146 .LASF56
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2397   .debug_str:00000000000001fb .LASF57
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2441   .debug_str:00000000000002c4 .LASF58
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2527   .debug_str:00000000000004aa .LASF59
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2343   .debug_str:00000000000000d4 .LASF60
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2347   .debug_str:00000000000000e7 .LASF61
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2587   .debug_str:000000000000064e .LASF62
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2539   .debug_str:00000000000004da .LASF63
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2379   .debug_str:00000000000001a2 .LASF64
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2413   .debug_str:0000000000000245 .LASF65
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2435   .debug_str:00000000000002af .LASF66
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2501   .debug_str:0000000000000426 .LASF67
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2489   .debug_str:00000000000003ea .LASF68
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2519   .debug_str:000000000000048d .LASF69
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2535   .debug_str:00000000000004ce .LASF70
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2369   .debug_str:000000000000016e .LASF71
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2405   .debug_str:000000000000021d .LASF72
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2393   .debug_str:00000000000001eb .LASF73
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2507   .debug_str:0000000000000450 .LASF74
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s 			page 6
 
 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2315   .debug_str:000000000000002c .LASF75
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2515   .debug_str:0000000000000469 .LASF76
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2511   .debug_str:0000000000000457 .LASF77
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2461   .debug_str:0000000000000357 .LASF78
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2513   .debug_str:000000000000045f .LASF79
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2425   .debug_str:0000000000000285 .LASF80
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2371   .debug_str:0000000000000175 .LASF81
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2603   .debug_str:0000000000000696 .LASF82
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2467   .debug_str:0000000000000378 .LASF83
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2407   .debug_str:0000000000000225 .LASF84
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2377   .debug_str:000000000000019a .LASF85
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2431   .debug_str:000000000000029b .LASF86
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2319   .debug_str:0000000000000041 .LASF87
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2585   .debug_str:0000000000000641 .LASF88
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2361   .debug_str:000000000000014e .LASF89
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2353   .debug_str:000000000000010e .LASF90
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2537   .debug_str:00000000000004d2 .LASF91
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2493   .debug_str:00000000000003ff .LASF92
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2579   .debug_str:0000000000000628 .LASF93
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2415   .debug_str:000000000000024b .LASF94
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2479   .debug_str:00000000000003be .LASF95
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2313   .debug_str:0000000000000024 .LASF96
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2521   .debug_str:0000000000000491 .LASF97
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2439   .debug_str:00000000000002f7 .LASF98
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2563   .debug_str:00000000000005d1 .LASF99
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2573   .debug_str:0000000000000607 .LASF100
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2555   .debug_str:0000000000000520 .LASF101
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2421   .debug_str:0000000000000269 .LASF102
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2593   .debug_str:0000000000000664 .LASF103
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2463   .debug_str:0000000000000362 .LASF104
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2417   .debug_str:0000000000000252 .LASF105
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2597   .debug_str:000000000000067c .LASF106
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2505   .debug_str:0000000000000440 .LASF107
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2601   .debug_str:0000000000000688 .LASF108
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2337   .debug_str:00000000000000b6 .LASF109
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2583   .debug_str:0000000000000637 .LASF110
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2419   .debug_str:000000000000025d .LASF111
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2567   .debug_str:00000000000005de .LASF112
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2383   .debug_str:00000000000001bb .LASF113
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2335   .debug_str:00000000000000a7 .LASF114
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2381   .debug_str:00000000000001aa .LASF115
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2321   .debug_str:000000000000004a .LASF116
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2323   .debug_str:0000000000000059 .LASF117
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2481   .debug_str:00000000000003c4 .LASF118
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2455   .debug_str:000000000000033f .LASF119
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2447   .debug_str:0000000000000317 .LASF120
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2589   .debug_str:0000000000000651 .LASF121
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2331   .debug_str:000000000000008d .LASF149
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2391   .debug_str:00000000000001df .LASF122
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2569   .debug_str:00000000000005eb .LASF123
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2375   .debug_str:000000000000018d .LASF124
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2499   .debug_str:0000000000000419 .LASF125
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2403   .debug_str:000000000000020d .LASF126
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2471   .debug_str:0000000000000394 .LASF127
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2333   .debug_str:0000000000000098 .LASF128
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2575   .debug_str:0000000000000614 .LASF129
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2433   .debug_str:00000000000002a0 .LASF130
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s 			page 7
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2315   .debug_str:000000000000002c .LASF75
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2515   .debug_str:000000000000046c .LASF76
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2511   .debug_str:000000000000045a .LASF77
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2459   .debug_str:0000000000000315 .LASF78
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2513   .debug_str:0000000000000462 .LASF79
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2425   .debug_str:0000000000000285 .LASF80
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2371   .debug_str:0000000000000175 .LASF81
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2603   .debug_str:0000000000000699 .LASF82
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2465   .debug_str:0000000000000336 .LASF83
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2407   .debug_str:0000000000000225 .LASF84
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2377   .debug_str:000000000000019a .LASF85
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2431   .debug_str:000000000000029b .LASF86
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2319   .debug_str:0000000000000041 .LASF87
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2585   .debug_str:0000000000000644 .LASF88
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2361   .debug_str:000000000000014e .LASF89
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2353   .debug_str:000000000000010e .LASF90
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2537   .debug_str:00000000000004d5 .LASF91
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2493   .debug_str:0000000000000402 .LASF92
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2579   .debug_str:000000000000062b .LASF93
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2415   .debug_str:000000000000024b .LASF94
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2477   .debug_str:000000000000037c .LASF95
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2313   .debug_str:0000000000000024 .LASF96
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2521   .debug_str:0000000000000494 .LASF97
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2437   .debug_str:00000000000002b5 .LASF98
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2563   .debug_str:00000000000005d4 .LASF99
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2573   .debug_str:000000000000060a .LASF100
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2555   .debug_str:0000000000000523 .LASF101
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2421   .debug_str:0000000000000269 .LASF102
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2593   .debug_str:0000000000000667 .LASF103
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2461   .debug_str:0000000000000320 .LASF104
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2417   .debug_str:0000000000000252 .LASF105
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2597   .debug_str:000000000000067f .LASF106
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2505   .debug_str:0000000000000443 .LASF107
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2601   .debug_str:000000000000068b .LASF108
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2337   .debug_str:00000000000000b6 .LASF109
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2583   .debug_str:000000000000063a .LASF110
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2419   .debug_str:000000000000025d .LASF111
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2567   .debug_str:00000000000005e1 .LASF112
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2383   .debug_str:00000000000001bb .LASF113
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2335   .debug_str:00000000000000a7 .LASF114
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2381   .debug_str:00000000000001aa .LASF115
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2321   .debug_str:000000000000004a .LASF116
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2323   .debug_str:0000000000000059 .LASF117
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2481   .debug_str:00000000000003c7 .LASF118
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2453   .debug_str:00000000000002fd .LASF119
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2445   .debug_str:00000000000002d5 .LASF120
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2589   .debug_str:0000000000000654 .LASF121
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2331   .debug_str:000000000000008d .LASF149
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2391   .debug_str:00000000000001df .LASF122
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2569   .debug_str:00000000000005ee .LASF123
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2375   .debug_str:000000000000018d .LASF124
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2499   .debug_str:000000000000041c .LASF125
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2403   .debug_str:000000000000020d .LASF126
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2469   .debug_str:0000000000000352 .LASF127
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2333   .debug_str:0000000000000098 .LASF128
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2575   .debug_str:0000000000000617 .LASF129
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2433   .debug_str:00000000000002a0 .LASF130
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s 			page 7
 
 
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2541   .debug_str:00000000000004e0 .LASF131
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2475   .debug_str:00000000000003a0 .LASF132
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2309   .debug_str:000000000000000c .LASF133
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2451   .debug_str:0000000000000327 .LASF134
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2327   .debug_str:0000000000000074 .LASF135
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2605   .debug_str:000000000000069b .LASF136
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2491   .debug_str:00000000000003ef .LASF137
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2429   .debug_str:0000000000000293 .LASF138
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2449   .debug_str:0000000000000320 .LASF139
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2453   .debug_str:0000000000000338 .LASF140
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2551   .debug_str:0000000000000513 .LASF141
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2599   .debug_str:0000000000000681 .LASF142
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2441   .debug_str:00000000000002fd .LASF143
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2325   .debug_str:000000000000006a .LASF150
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:14     .text._put_char:0000000000000000 .LFB4
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:71     .text._put_char:000000000000003c .LFE4
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2253   .debug_loc:0000000000000000 .LLST0
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2271   .debug_loc:000000000000002c .LLST1
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:45     .text._put_char:0000000000000022 .LVL2
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:53     .text._put_char:000000000000002e .LVL3
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2503   .debug_str:000000000000042c .LASF144
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:2423   .debug_str:0000000000000276 .LASF145
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:22     .text._put_char:0000000000000002 .LCFI0
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:67     .text._put_char:000000000000003a .LCFI1
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:18     .text._put_char:0000000000000000 .LVL0
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:37     .text._put_char:0000000000000014 .LVL1
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:65     .text._put_char:0000000000000038 .LVL4
-C:\Users\zanil\AppData\Local\Temp\cctI4zfv.s:87     .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2541   .debug_str:00000000000004e3 .LASF131
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2473   .debug_str:000000000000035e .LASF132
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2309   .debug_str:000000000000000c .LASF133
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2449   .debug_str:00000000000002e5 .LASF134
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2327   .debug_str:0000000000000074 .LASF135
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2605   .debug_str:000000000000069e .LASF136
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2491   .debug_str:00000000000003f2 .LASF137
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2429   .debug_str:0000000000000293 .LASF138
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2447   .debug_str:00000000000002de .LASF139
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2451   .debug_str:00000000000002f6 .LASF140
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2551   .debug_str:0000000000000516 .LASF141
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2599   .debug_str:0000000000000684 .LASF142
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2439   .debug_str:00000000000002bb .LASF143
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2325   .debug_str:000000000000006a .LASF150
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:14     .text._put_char:0000000000000000 .LFB4
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:71     .text._put_char:000000000000003c .LFE4
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2253   .debug_loc:0000000000000000 .LLST0
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2271   .debug_loc:000000000000002c .LLST1
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:45     .text._put_char:0000000000000022 .LVL2
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:53     .text._put_char:000000000000002e .LVL3
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2503   .debug_str:000000000000042f .LASF144
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:2423   .debug_str:0000000000000276 .LASF145
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:22     .text._put_char:0000000000000002 .LCFI0
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:67     .text._put_char:000000000000003a .LCFI1
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:18     .text._put_char:0000000000000000 .LVL0
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:37     .text._put_char:0000000000000014 .LVL1
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:65     .text._put_char:0000000000000038 .LVL4
+C:\Users\zanil\AppData\Local\Temp\cceV4GWb.s:87     .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 usart_data_transmit
