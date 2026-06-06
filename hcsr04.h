@@ -1,14 +1,14 @@
-#ifndef HCSR04_H
-#define HCSR04_H
-
-#include <stdint.h> 
-
 /**
  * @file    hcsr04.h
  * @brief   HC-SR04 ultrasonic sensor FSM driver header
  * @version 1.0
  * @date    2026-05-11
  */
+
+ #ifndef HCSR04_H
+#define HCSR04_H
+
+#include <stdint.h> 
 
 void hcsr04_init(void);
 void hcsr04_tick(void);

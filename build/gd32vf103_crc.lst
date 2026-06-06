@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 1
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 1
 
 
    1              		.file	"gd32vf103_crc.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 1
   41:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_crc.c **** /*!
   42:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_crc.c ****     \brief      deinit CRC calculation unit
   43:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_crc.c ****     \param[in]  none
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 2
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 2
 
 
   44:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_crc.c ****     \param[out] none
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 1
   52              	.LFE3:
   54              		.section	.text.crc_data_register_read,"ax",@progbits
   55              		.align	1
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 3
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 3
 
 
   56              		.globl	crc_data_register_read
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 1
   88              		.loc 1 88 5 is_stmt 1
   89:./../../firmware/GD32VF103_standard_peripheral/Source/gd32vf103_crc.c **** }
   89              		.loc 1 89 1 is_stmt 0
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 4
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 4
 
 
   90 0006 1375F50F 		andi	a0,a0,0xff
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 1
  126              		.loc 1 111 5 is_stmt 1
  127              		.loc 1 111 13 is_stmt 0
  128 0006 8843     		lw	a0,0(a5)
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 5
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 5
 
 
  129              	.LVL4:
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 1
  165              		.loc 1 125 25 is_stmt 0 discriminator 3
  166 0012 13972700 		slli	a4,a5,2
  167 0016 2A97     		add	a4,a0,a4
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 6
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 6
 
 
  168 0018 1843     		lw	a4,0(a4)
@@ -317,154 +317,154 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 1
  180              		.file 2 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
  181              		.file 3 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
  182              		.file 4 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 7
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 gd32vf103_crc.c
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:13     .text.crc_deinit:0000000000000000 crc_deinit
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:17     .text.crc_deinit:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:18     .text.crc_deinit:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:19     .text.crc_deinit:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:20     .text.crc_deinit:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:24     .text.crc_deinit:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:25     .text.crc_deinit:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:27     .text.crc_deinit:000000000000000c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:28     .text.crc_deinit:000000000000000c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:31     .text.crc_deinit:0000000000000010 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:32     .text.crc_deinit:0000000000000012 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:39     .text.crc_data_register_reset:0000000000000000 crc_data_register_reset
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:42     .text.crc_data_register_reset:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:43     .text.crc_data_register_reset:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:44     .text.crc_data_register_reset:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:45     .text.crc_data_register_reset:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:50     .text.crc_data_register_reset:000000000000000c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:51     .text.crc_data_register_reset:000000000000000e .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:58     .text.crc_data_register_read:0000000000000000 crc_data_register_read
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:61     .text.crc_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:62     .text.crc_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:63     .text.crc_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:64     .text.crc_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:65     .text.crc_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:69     .text.crc_data_register_read:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:70     .text.crc_data_register_read:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:71     .text.crc_data_register_read:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:78     .text.crc_free_data_register_read:0000000000000000 crc_free_data_register_read
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:81     .text.crc_free_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:82     .text.crc_free_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:83     .text.crc_free_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:84     .text.crc_free_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:85     .text.crc_free_data_register_read:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:89     .text.crc_free_data_register_read:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:90     .text.crc_free_data_register_read:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:92     .text.crc_free_data_register_read:000000000000000c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:99     .text.crc_free_data_register_write:0000000000000000 crc_free_data_register_write
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:102    .text.crc_free_data_register_write:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:104    .text.crc_free_data_register_write:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:105    .text.crc_free_data_register_write:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:106    .text.crc_free_data_register_write:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:109    .text.crc_free_data_register_write:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:110    .text.crc_free_data_register_write:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:117    .text.crc_single_data_calculate:0000000000000000 crc_single_data_calculate
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:120    .text.crc_single_data_calculate:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:122    .text.crc_single_data_calculate:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:123    .text.crc_single_data_calculate:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:124    .text.crc_single_data_calculate:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:127    .text.crc_single_data_calculate:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:128    .text.crc_single_data_calculate:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:131    .text.crc_single_data_calculate:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:132    .text.crc_single_data_calculate:000000000000000a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:139    .text.crc_block_data_calculate:0000000000000000 crc_block_data_calculate
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:142    .text.crc_block_data_calculate:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:144    .text.crc_block_data_calculate:0000000000000000 .L0 
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 8
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:13     .text.crc_deinit:0000000000000000 crc_deinit
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:17     .text.crc_deinit:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:18     .text.crc_deinit:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:19     .text.crc_deinit:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:20     .text.crc_deinit:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:24     .text.crc_deinit:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:25     .text.crc_deinit:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:27     .text.crc_deinit:000000000000000c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:28     .text.crc_deinit:000000000000000c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:31     .text.crc_deinit:0000000000000010 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:32     .text.crc_deinit:0000000000000012 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:39     .text.crc_data_register_reset:0000000000000000 crc_data_register_reset
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:42     .text.crc_data_register_reset:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:43     .text.crc_data_register_reset:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:44     .text.crc_data_register_reset:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:45     .text.crc_data_register_reset:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:50     .text.crc_data_register_reset:000000000000000c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:51     .text.crc_data_register_reset:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:58     .text.crc_data_register_read:0000000000000000 crc_data_register_read
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:61     .text.crc_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:62     .text.crc_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:63     .text.crc_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:64     .text.crc_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:65     .text.crc_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:69     .text.crc_data_register_read:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:70     .text.crc_data_register_read:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:71     .text.crc_data_register_read:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:78     .text.crc_free_data_register_read:0000000000000000 crc_free_data_register_read
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:81     .text.crc_free_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:82     .text.crc_free_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:83     .text.crc_free_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:84     .text.crc_free_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:85     .text.crc_free_data_register_read:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:89     .text.crc_free_data_register_read:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:90     .text.crc_free_data_register_read:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:92     .text.crc_free_data_register_read:000000000000000c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:99     .text.crc_free_data_register_write:0000000000000000 crc_free_data_register_write
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:102    .text.crc_free_data_register_write:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:104    .text.crc_free_data_register_write:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:105    .text.crc_free_data_register_write:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:106    .text.crc_free_data_register_write:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:109    .text.crc_free_data_register_write:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:110    .text.crc_free_data_register_write:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:117    .text.crc_single_data_calculate:0000000000000000 crc_single_data_calculate
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:120    .text.crc_single_data_calculate:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:122    .text.crc_single_data_calculate:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:123    .text.crc_single_data_calculate:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:124    .text.crc_single_data_calculate:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:127    .text.crc_single_data_calculate:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:128    .text.crc_single_data_calculate:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:131    .text.crc_single_data_calculate:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:132    .text.crc_single_data_calculate:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:139    .text.crc_block_data_calculate:0000000000000000 crc_block_data_calculate
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:142    .text.crc_block_data_calculate:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:144    .text.crc_block_data_calculate:0000000000000000 .L0 
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 8
 
 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:145    .text.crc_block_data_calculate:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:146    .text.crc_block_data_calculate:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:147    .text.crc_block_data_calculate:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:149    .text.crc_block_data_calculate:0000000000000002 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:153    .text.crc_block_data_calculate:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:155    .text.crc_block_data_calculate:000000000000000a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:156    .text.crc_block_data_calculate:000000000000000a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:161    .text.crc_block_data_calculate:0000000000000010 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:165    .text.crc_block_data_calculate:0000000000000012 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:166    .text.crc_block_data_calculate:0000000000000012 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:170    .text.crc_block_data_calculate:000000000000001a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:173    .text.crc_block_data_calculate:000000000000001c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:175    .text.crc_block_data_calculate:0000000000000020 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:35     .text.crc_deinit:0000000000000012 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:54     .text.crc_data_register_reset:000000000000000e .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:74     .text.crc_data_register_read:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:95     .text.crc_free_data_register_read:000000000000000c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:113    .text.crc_free_data_register_write:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:135    .text.crc_single_data_calculate:000000000000000a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:178    .text.crc_block_data_calculate:0000000000000020 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:145    .text.crc_block_data_calculate:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:146    .text.crc_block_data_calculate:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:147    .text.crc_block_data_calculate:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:149    .text.crc_block_data_calculate:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:153    .text.crc_block_data_calculate:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:155    .text.crc_block_data_calculate:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:156    .text.crc_block_data_calculate:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:161    .text.crc_block_data_calculate:0000000000000010 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:165    .text.crc_block_data_calculate:0000000000000012 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:166    .text.crc_block_data_calculate:0000000000000012 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:170    .text.crc_block_data_calculate:000000000000001a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:173    .text.crc_block_data_calculate:000000000000001c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:175    .text.crc_block_data_calculate:0000000000000020 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:35     .text.crc_deinit:0000000000000012 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:54     .text.crc_data_register_reset:000000000000000e .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:74     .text.crc_data_register_read:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:95     .text.crc_free_data_register_read:000000000000000c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:113    .text.crc_free_data_register_write:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:135    .text.crc_single_data_calculate:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:178    .text.crc_block_data_calculate:0000000000000020 .L0 
                      .debug_frame:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:163    .text.crc_block_data_calculate:0000000000000012 .L9
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:151    .text.crc_block_data_calculate:0000000000000006 .L8
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:437    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:817    .debug_str:00000000000001d1 .LASF27
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:805    .debug_str:0000000000000145 .LASF28
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:779    .debug_str:0000000000000053 .LASF29
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:747    .debug_ranges:0000000000000000 .Ldebug_ranges0
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:765    .debug_line:0000000000000000 .Ldebug_line0
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:789    .debug_str:00000000000000d3 .LASF0
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:825    .debug_str:0000000000000277 .LASF1
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:767    .debug_str:0000000000000000 .LASF6
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:783    .debug_str:000000000000009e .LASF2
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:815    .debug_str:00000000000001c7 .LASF3
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:777    .debug_str:0000000000000040 .LASF4
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:821    .debug_str:0000000000000262 .LASF5
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:787    .debug_str:00000000000000c8 .LASF7
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:775    .debug_str:000000000000002e .LASF8
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:807    .debug_str:000000000000018b .LASF9
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:795    .debug_str:00000000000000f0 .LASF10
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:797    .debug_str:0000000000000107 .LASF11
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:819    .debug_str:0000000000000259 .LASF12
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:809    .debug_str:0000000000000199 .LASF30
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:823    .debug_str:000000000000026b .LASF13
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:803    .debug_str:000000000000012c .LASF16
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:140    .text.crc_block_data_calculate:0000000000000000 .LFB8
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:176    .text.crc_block_data_calculate:0000000000000020 .LFE8
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:781    .debug_str:0000000000000098 .LASF14
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:676    .debug_loc:0000000000000000 .LLST1
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:773    .debug_str:0000000000000029 .LASF15
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:811    .debug_str:00000000000001a9 .LASF21
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:694    .debug_loc:000000000000002c .LLST2
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:769    .debug_str:000000000000000a .LASF17
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:118    .text.crc_single_data_calculate:0000000000000000 .LFB7
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:133    .text.crc_single_data_calculate:000000000000000a .LFE7
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:799    .debug_str:000000000000010f .LASF18
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:710    .debug_loc:0000000000000056 .LLST0
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s 			page 9
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:163    .text.crc_block_data_calculate:0000000000000012 .L9
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:151    .text.crc_block_data_calculate:0000000000000006 .L8
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:437    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:817    .debug_str:00000000000001d1 .LASF27
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:805    .debug_str:0000000000000145 .LASF28
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:779    .debug_str:0000000000000053 .LASF29
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:747    .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:765    .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:789    .debug_str:00000000000000d3 .LASF0
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:825    .debug_str:0000000000000277 .LASF1
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:767    .debug_str:0000000000000000 .LASF6
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:783    .debug_str:000000000000009e .LASF2
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:815    .debug_str:00000000000001c7 .LASF3
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:777    .debug_str:0000000000000040 .LASF4
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:821    .debug_str:0000000000000262 .LASF5
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:787    .debug_str:00000000000000c8 .LASF7
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:775    .debug_str:000000000000002e .LASF8
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:807    .debug_str:000000000000018b .LASF9
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:795    .debug_str:00000000000000f0 .LASF10
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:797    .debug_str:0000000000000107 .LASF11
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:819    .debug_str:0000000000000259 .LASF12
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:809    .debug_str:0000000000000199 .LASF30
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:823    .debug_str:000000000000026b .LASF13
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:803    .debug_str:000000000000012c .LASF16
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:140    .text.crc_block_data_calculate:0000000000000000 .LFB8
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:176    .text.crc_block_data_calculate:0000000000000020 .LFE8
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:781    .debug_str:0000000000000098 .LASF14
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:676    .debug_loc:0000000000000000 .LLST1
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:773    .debug_str:0000000000000029 .LASF15
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:811    .debug_str:00000000000001a9 .LASF21
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:694    .debug_loc:000000000000002c .LLST2
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:769    .debug_str:000000000000000a .LASF17
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:118    .text.crc_single_data_calculate:0000000000000000 .LFB7
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:133    .text.crc_single_data_calculate:000000000000000a .LFE7
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:799    .debug_str:000000000000010f .LASF18
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:710    .debug_loc:0000000000000056 .LLST0
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s 			page 9
 
 
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:829    .debug_str:000000000000028e .LASF31
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:100    .text.crc_free_data_register_write:0000000000000000 .LFB6
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:111    .text.crc_free_data_register_write:0000000000000008 .LFE6
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:791    .debug_str:00000000000000e0 .LASF19
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:785    .debug_str:00000000000000ac .LASF20
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:79     .text.crc_free_data_register_read:0000000000000000 .LFB5
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:93     .text.crc_free_data_register_read:000000000000000c .LFE5
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:793    .debug_str:00000000000000ea .LASF22
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:801    .debug_str:0000000000000115 .LASF23
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:59     .text.crc_data_register_read:0000000000000000 .LFB4
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:72     .text.crc_data_register_read:0000000000000008 .LFE4
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:771    .debug_str:0000000000000024 .LASF24
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:813    .debug_str:00000000000001af .LASF25
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:40     .text.crc_data_register_reset:0000000000000000 .LFB3
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:52     .text.crc_data_register_reset:000000000000000e .LFE3
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:827    .debug_str:0000000000000283 .LASF26
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:14     .text.crc_deinit:0000000000000000 .LFB2
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:33     .text.crc_deinit:0000000000000012 .LFE2
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:143    .text.crc_block_data_calculate:0000000000000000 .LVL5
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:159    .text.crc_block_data_calculate:0000000000000010 .LVL8
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:162    .text.crc_block_data_calculate:0000000000000012 .LVL9
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:150    .text.crc_block_data_calculate:0000000000000006 .LVL6
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:157    .text.crc_block_data_calculate:000000000000000e .LVL7
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:121    .text.crc_single_data_calculate:0000000000000000 .LVL3
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:129    .text.crc_single_data_calculate:0000000000000008 .LVL4
-C:\Users\zanil\AppData\Local\Temp\ccmjdFXf.s:184    .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:829    .debug_str:000000000000028e .LASF31
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:100    .text.crc_free_data_register_write:0000000000000000 .LFB6
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:111    .text.crc_free_data_register_write:0000000000000008 .LFE6
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:791    .debug_str:00000000000000e0 .LASF19
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:785    .debug_str:00000000000000ac .LASF20
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:79     .text.crc_free_data_register_read:0000000000000000 .LFB5
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:93     .text.crc_free_data_register_read:000000000000000c .LFE5
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:793    .debug_str:00000000000000ea .LASF22
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:801    .debug_str:0000000000000115 .LASF23
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:59     .text.crc_data_register_read:0000000000000000 .LFB4
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:72     .text.crc_data_register_read:0000000000000008 .LFE4
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:771    .debug_str:0000000000000024 .LASF24
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:813    .debug_str:00000000000001af .LASF25
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:40     .text.crc_data_register_reset:0000000000000000 .LFB3
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:52     .text.crc_data_register_reset:000000000000000e .LFE3
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:827    .debug_str:0000000000000283 .LASF26
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:14     .text.crc_deinit:0000000000000000 .LFB2
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:33     .text.crc_deinit:0000000000000012 .LFE2
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:143    .text.crc_block_data_calculate:0000000000000000 .LVL5
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:159    .text.crc_block_data_calculate:0000000000000010 .LVL8
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:162    .text.crc_block_data_calculate:0000000000000012 .LVL9
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:150    .text.crc_block_data_calculate:0000000000000006 .LVL6
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:157    .text.crc_block_data_calculate:000000000000000e .LVL7
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:121    .text.crc_single_data_calculate:0000000000000000 .LVL3
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:129    .text.crc_single_data_calculate:0000000000000008 .LVL4
+C:\Users\zanil\AppData\Local\Temp\ccHmRhXm.s:184    .debug_info:0000000000000000 .Ldebug_info0
 
 NO UNDEFINED SYMBOLS

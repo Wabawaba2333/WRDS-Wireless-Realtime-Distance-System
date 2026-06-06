@@ -1,4 +1,11 @@
-#include "hcsr04.h"
+/**
+ * @file    hcsr04.c
+ * @brief   HC-SR04 ultrasonic sensor FSM driver
+ * @version 1.0
+ * @date    2026-05-14
+ */
+
+ #include "hcsr04.h"
 #include "gd32vf103.h"
 #include <string.h>
 
@@ -8,13 +15,6 @@
 #define TIME_OUT_30MS (810000U)   /* 30ms — waiting for echo to start (STATE_ECHO_HIGH) */
 #define TIME_OUT_40MS (1080000U)  /* 40ms — waiting for echo to end; covers HC-SR04's 38ms no-object hold */
 #define WINDOW_SIZE 5
-
-/**
- * @file    hcsr04.c
- * @brief   HC-SR04 ultrasonic sensor FSM driver
- * @version 1.0
- * @date    2026-05-14
- */
 
 typedef enum status
 {
@@ -40,26 +40,25 @@ static uint8_t filter_idx = 0;
 static int32_t apply_median_filter(int32_t raw_val) 
 {
     filter_buffer[filter_idx] = raw_val;
-    filter_idx = (filter_idx + 1) % WINDOW_SIZE;
+    filter_idx = (uint8_t)(((uint32_t)filter_idx + 1U) % WINDOW_SIZE);
     
     int32_t sorted[WINDOW_SIZE];
-    memcpy(sorted, filter_buffer, sizeof(sorted));
+    (void)memcpy(sorted, filter_buffer, sizeof(sorted)); 
     
-    for (int i = 0; i < WINDOW_SIZE - 1; i++) 
+    for (uint8_t i = 0U; i < (WINDOW_SIZE - 1U); i++) 
     {
-        for (int j = 0; j < WINDOW_SIZE - 1 - i; j++) 
+        for (uint8_t j = 0U; j < (WINDOW_SIZE - 1U - i); j++) 
         {
-            if (sorted[j] > sorted[j+1]) 
+            if (sorted[j] > sorted[j + 1U]) 
             {
                 int32_t tmp = sorted[j];
-                sorted[j] = sorted[j+1];
-                sorted[j+1] = tmp;
+                sorted[j] = sorted[j + 1U];
+                sorted[j + 1U] = tmp;
             }
         }
     }
-    return sorted[WINDOW_SIZE / 2];
+    return sorted[WINDOW_SIZE / 2U];
 }
-
 void hcsr04_init(void)
 {
     rcu_periph_clock_enable(RCU_GPIOA);

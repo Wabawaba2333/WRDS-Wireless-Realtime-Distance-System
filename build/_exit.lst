@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s 			page 1
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccqadPma.s 			page 1
 
 
    1              		.file	"_exit.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s 			page 1
   41      E7800000 
   42              	.LVL2:
   11:./../../firmware/RISCV/stubs/_exit.c **** 
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s 			page 2
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccqadPma.s 			page 2
 
 
   12:./../../firmware/RISCV/stubs/_exit.c ****   write(STDERR_FILENO, message, sizeof(message) - 1);
@@ -109,82 +109,82 @@ GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s 			page 1
   77              		.file 2 "c:\\kth\\digtal_teknik\\risc1\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\i
   78              		.file 3 "./../../firmware/RISCV/stubs/stub.h"
   79              		.file 4 "<built-in>"
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s 			page 3
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccqadPma.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 _exit.c
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:13     .text._exit:0000000000000000 _exit
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:17     .text._exit:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:19     .text._exit:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:20     .text._exit:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:21     .text._exit:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:23     .text._exit:0000000000000002 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:25     .text._exit:0000000000000002 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:27     .text._exit:0000000000000006 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:29     .text._exit:0000000000000008 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:30     .text._exit:000000000000000a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:32     .text._exit:000000000000000a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:34     .text._exit:000000000000000c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:38     .text._exit:0000000000000012 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:39     .text._exit:0000000000000014 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:41     .text._exit:0000000000000014 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:44     .text._exit:000000000000001c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:50     .text._exit:000000000000002a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:55     .text._exit:0000000000000036 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:63     .text._exit:000000000000004a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:64     .text._exit:000000000000004a .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:65     .text._exit:000000000000004c .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:68     .text._exit:000000000000004c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:13     .text._exit:0000000000000000 _exit
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:17     .text._exit:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:19     .text._exit:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:20     .text._exit:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:21     .text._exit:0000000000000000 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:23     .text._exit:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:25     .text._exit:0000000000000002 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:27     .text._exit:0000000000000006 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:29     .text._exit:0000000000000008 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:30     .text._exit:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:32     .text._exit:000000000000000a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:34     .text._exit:000000000000000c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:38     .text._exit:0000000000000012 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:39     .text._exit:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:41     .text._exit:0000000000000014 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:44     .text._exit:000000000000001c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:50     .text._exit:000000000000002a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:55     .text._exit:0000000000000036 .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:63     .text._exit:000000000000004a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:64     .text._exit:000000000000004a .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:65     .text._exit:000000000000004c .L0 
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:68     .text._exit:000000000000004c .L0 
                      .debug_frame:0000000000000000 .L0 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:73     .rodata._exit.str1.4:0000000000000004 .LC0
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:70     .rodata._exit.str1.4:0000000000000000 .LC1
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:61     .text._exit:000000000000004a .L2
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:342    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:647    .debug_str:00000000000000ab .LASF19
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:667    .debug_str:00000000000001ca .LASF20
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:661    .debug_str:0000000000000178 .LASF21
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:607    .debug_ranges:0000000000000000 .Ldebug_ranges0
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:613    .debug_line:0000000000000000 .Ldebug_line0
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:651    .debug_str:0000000000000146 .LASF0
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:637    .debug_str:0000000000000081 .LASF1
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:659    .debug_str:000000000000016e .LASF2
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:649    .debug_str:0000000000000133 .LASF3
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:641    .debug_str:0000000000000094 .LASF4
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:627    .debug_str:0000000000000042 .LASF5
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:615    .debug_str:0000000000000000 .LASF6
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:629    .debug_str:0000000000000054 .LASF7
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:619    .debug_str:000000000000001f .LASF8
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:639    .debug_str:000000000000008f .LASF9
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:655    .debug_str:000000000000015b .LASF10
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:663    .debug_str:00000000000001bd .LASF11
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:657    .debug_str:0000000000000167 .LASF12
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:623    .debug_str:0000000000000034 .LASF13
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:625    .debug_str:000000000000003b .LASF14
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:643    .debug_str:000000000000009d .LASF15
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:653    .debug_str:0000000000000152 .LASF16
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:635    .debug_str:000000000000007b .LASF22
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:14     .text._exit:0000000000000000 .LFB1
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:66     .text._exit:000000000000004c .LFE1
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:570    .debug_loc:0000000000000000 .LLST0
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:665    .debug_str:00000000000001c5 .LASF23
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:583    .debug_loc:0000000000000020 .LLST1
-GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s 			page 4
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:73     .rodata._exit.str1.4:0000000000000004 .LC0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:70     .rodata._exit.str1.4:0000000000000000 .LC1
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:61     .text._exit:000000000000004a .L2
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:342    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:647    .debug_str:00000000000000ab .LASF19
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:667    .debug_str:00000000000001ca .LASF20
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:661    .debug_str:0000000000000178 .LASF21
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:607    .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:613    .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:651    .debug_str:0000000000000146 .LASF0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:637    .debug_str:0000000000000081 .LASF1
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:659    .debug_str:000000000000016e .LASF2
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:649    .debug_str:0000000000000133 .LASF3
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:641    .debug_str:0000000000000094 .LASF4
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:627    .debug_str:0000000000000042 .LASF5
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:615    .debug_str:0000000000000000 .LASF6
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:629    .debug_str:0000000000000054 .LASF7
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:619    .debug_str:000000000000001f .LASF8
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:639    .debug_str:000000000000008f .LASF9
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:655    .debug_str:000000000000015b .LASF10
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:663    .debug_str:00000000000001bd .LASF11
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:657    .debug_str:0000000000000167 .LASF12
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:623    .debug_str:0000000000000034 .LASF13
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:625    .debug_str:000000000000003b .LASF14
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:643    .debug_str:000000000000009d .LASF15
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:653    .debug_str:0000000000000152 .LASF16
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:635    .debug_str:000000000000007b .LASF22
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:14     .text._exit:0000000000000000 .LFB1
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:66     .text._exit:000000000000004c .LFE1
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:570    .debug_loc:0000000000000000 .LLST0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:665    .debug_str:00000000000001c5 .LASF23
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:583    .debug_loc:0000000000000020 .LLST1
+GAS LISTING C:\Users\zanil\AppData\Local\Temp\ccqadPma.s 			page 4
 
 
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:621    .debug_str:000000000000002c .LASF24
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:42     .text._exit:000000000000001c .LVL2
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:48     .text._exit:000000000000002a .LVL3
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:53     .text._exit:0000000000000036 .LVL4
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:60     .text._exit:000000000000004a .LVL5
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:645    .debug_str:00000000000000a4 .LASF25
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:617    .debug_str:000000000000000e .LASF26
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:633    .debug_str:0000000000000075 .LASF17
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:631    .debug_str:000000000000006b .LASF18
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:22     .text._exit:0000000000000002 .LCFI0
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:18     .text._exit:0000000000000000 .LVL0
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:36     .text._exit:0000000000000012 .LVL1
-C:\Users\zanil\AppData\Local\Temp\ccobOEU1.s:81     .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:621    .debug_str:000000000000002c .LASF24
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:42     .text._exit:000000000000001c .LVL2
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:48     .text._exit:000000000000002a .LVL3
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:53     .text._exit:0000000000000036 .LVL4
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:60     .text._exit:000000000000004a .LVL5
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:645    .debug_str:00000000000000a4 .LASF25
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:617    .debug_str:000000000000000e .LASF26
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:633    .debug_str:0000000000000075 .LASF17
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:631    .debug_str:000000000000006b .LASF18
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:22     .text._exit:0000000000000002 .LCFI0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:18     .text._exit:0000000000000000 .LVL0
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:36     .text._exit:0000000000000012 .LVL1
+C:\Users\zanil\AppData\Local\Temp\ccqadPma.s:81     .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 memcpy
